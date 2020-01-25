@@ -1,0 +1,57 @@
+<div class="form-group">
+    <div class="form-group" style="padding: 0px 15px">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <span>Ho ten</span>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input placeholder="Nhập họ tên" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <h3>Danh sách User</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr class="text-center">
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Ho Ten</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">UserName</th>
+                    <th class="text-center">Date Of Birth</th>
+                    <th class="text-center" style="width: 250px">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let u of users; let i = index">
+                    <td class="text-center"> {{i}} </td>
+                    <td> {{u.fullName}} </td>
+                    <td> {{u.email}} </td>
+                    <td> {{u.username}} </td>
+                    <td> {{u.dateOfBirth}} </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button
+                                    class="btn btn-info btn-sm">
+                                <i class="fa fa-eye"></i>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit"
+                                    class="btn btn-primary btn-sm">
+                                <i class="fa fa-pencil"></i>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
