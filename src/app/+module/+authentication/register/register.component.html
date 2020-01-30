@@ -20,30 +20,37 @@
                     </div>
                     <div class="row row-space">
                         <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Birthday</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" name="birthday">
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Gender</label>
-                                <div class="p-t-10">
-                                    <label class="radio-container m-r-45">Male
-                                        <input type="radio" checked="checked" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">Female
-                                        <input type="radio" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
+                            <label class="label">Avatar</label>
+                            <input type="file" (change)="onFileChanged($event)">
+                            <img [src]="imgURL" height="200" *ngIf="imgURL">
                         </div>
                     </div>
+                    <!--                    <div class="row row-space">-->
+                    <!--                        <div class="col-5">-->
+                    <!--                            <div class="input-group">-->
+                    <!--                                <label class="label">Birthday</label>-->
+                    <!--                                <div class="input-group-icon">-->
+                    <!--                                    <input class="input&#45;&#45;style-4 js-datepicker" type="text" name="birthday">-->
+                    <!--                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                        <div class="col-5">-->
+                    <!--                            <div class="input-group">-->
+                    <!--                                <label class="label">Gender</label>-->
+                    <!--                                <div class="p-t-10">-->
+                    <!--                                    <label class="radio-container m-r-45">Male-->
+                    <!--                                        <input type="radio" checked="checked" name="gender">-->
+                    <!--                                        <span class="checkmark"></span>-->
+                    <!--                                    </label>-->
+                    <!--                                    <label class="radio-container">Female-->
+                    <!--                                        <input type="radio" name="gender">-->
+                    <!--                                        <span class="checkmark"></span>-->
+                    <!--                                    </label>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                     <div class="row row-space">
                         <div class="col-5">
                             <div class="input-group">
@@ -58,16 +65,69 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row row-space">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">Skype link Profile</label>
+                                <input class="input--style-4" type="email" name="email">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">Facebook link Profile</label>
+                                <input class="input--style-4" type="text" name="phone">
+                            </div>
+                        </div>
+                    </div>
                     <div class="input-group">
-                        <label class="label">Subject</label>
+                        <label class="label">UserType</label>
                         <div class="rs-select2 js-select-simple select--no-search">
                             <select name="subject">
                                 <option disabled="disabled" selected="selected">Choose option</option>
-                                <option>Subject 1</option>
-                                <option>Subject 2</option>
-                                <option>Subject 3</option>
+                                <option>Nhân viên</option>
+                                <option>Thử việc</option>
+                                <option>Học việc</option>
+                                <option>Sinh viên</option>
                             </select>
                             <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <label class="label">Address</label>
+                            <input class="input--style-4" type="text" name="first_name">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="label">Học Vấn</label>
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <select name="subject">
+                                <option disabled="disabled" selected="selected">Choose option</option>
+                                <option>Cao Đẳng</option>
+                                <option>Đại Học</option>
+                                <option>Tiến Sĩ</option>
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">University</label>
+                                <input class="input--style-4" type="text" name="university">
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">faculty</label>
+                                <input class="input--style-4" type="text" name="faculty">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="input-group">
+                            <label class="label">graduationYear</label>
+                            <input class="input--style-4" type="text" name="graduationYear">
                         </div>
                     </div>
                     <div class="p-t-15">

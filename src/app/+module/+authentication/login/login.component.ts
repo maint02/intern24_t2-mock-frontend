@@ -1,13 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Errors} from '../../../_models/errors';
-import {CONSUME_API} from '../../../_services/consume-apis';
-import {AuthRequestModel} from '../../../_models/auth/auth-request.model';
 import {ToastrService} from 'ngx-toastr';
-import {AuthenticationService} from '../../../_services/authentication.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 import {AuthService} from '../../../_services/auth.service';
+import {USER_ID_KEY, USER_ROLE_KEY, USER_TOKEN_KEY, USERNAME_KEY} from '../../../_models/config/local-storage-keys';
+import {LoginRequestModel} from '../../../_models/request/login-request.model';
 
 @Component({
     selector: 'app-login',
@@ -16,68 +12,44 @@ import {AuthService} from '../../../_services/auth.service';
 })
 
 export class LoginComponent implements OnInit {
-    isSubmitting = false;
-    errors: Errors = {errors: {}};
-    authForm: FormGroup;
-    submitted: boolean = false;
-    autRequest: AuthRequestModel = new AuthRequestModel();
-    returnUrl: string;
-
     username: string = '';
     password: string = '';
 
-    constructor(private formBuilder: FormBuilder,
-                private authService: AuthenticationService,
-                private toastr: ToastrService,
-                private route: ActivatedRoute,
-                private router: Router,
-                private translateService: TranslateService,
-                private auth: AuthService
+    constructor(
+        private toastr: ToastrService,
+        private router: Router,
+        private auth: AuthService
     ) {
     }
 
-    ngOnInit(): void {
-        // use FormBuilder to create a form group
-        this.authForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', [Validators.required]]
-        });
-
-        // reset login status
-        this.authService.logout();
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    }
-
-    get f() {
-        return this.authForm.controls;
-    }
-
-    submitForm() {
-        this.submitted = true;
-
-        if (this.authForm.invalid) {
-            return;
+    ngOnInit() {
+        if (this.auth.isLoggedIn()) {
+            this.router.navigate(['']);
         }
+    }
 
-        let url = CONSUME_API.AUTH.logIn;
+    onClickLogin(): void {
+        const loginInfo: LoginRequestModel = {
+            username: this.username,
+            password: this.password
+        };
 
-        this.autRequest.username = this.authForm.value.username;
-        this.autRequest.password = this.authForm.value.password;
+        this.auth.login(loginInfo).subscribe(data => {
+            localStorage.setItem(USER_ID_KEY, data.id);
+            localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
+            localStorage.setItem(USERNAME_KEY, data.username);
+            localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
 
-        this.authService.login(this.autRequest).subscribe(res => {
-            if (res.errorCode == '00') {
-                this.router.navigate([this.returnUrl]);
-            } else if (res.errorCode == '401') {
-                this.toastr.error(this.translateService.instant('login.error.unauthorized'), 'ERROR');
-            } else {
-                this.toastr.error(this.translateService.instant('login.error.err'), 'ERROR');
-            }
-        }, err => {
-            this.toastr.error(this.translateService.instant('login.error.err'), 'ERROR');
+            this.router.navigate(['']);
+        }, error => {
+            this.toastr.warning(error.error.message, 'Warning');
         });
     }
+
+    onClickRegister(): void {
+        this.router.navigate(['/register']);
+    }
+
 
 }
 

@@ -7,6 +7,7 @@ import {environment} from '../../environments/environment';
 import {catchError, retry} from 'rxjs/operators';
 import {USER_ID_KEY, USER_ROLE_KEY, USERNAME_KEY} from '../_models/config/local-storage-keys';
 import {API_VERIFY_ACCOUNT} from '../_models/config/api-paths';
+import {Employee} from '../_models/employee.model';
 
 
 @Injectable(
@@ -42,4 +43,6 @@ export class AuthService {
     activatedAccount(confirmationToken: string): Observable<any>{
         return this.http.get(`${API_VERIFY_ACCOUNT}/${confirmationToken}`);
     }
+
+
 }
