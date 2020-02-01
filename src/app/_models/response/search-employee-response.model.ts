@@ -2,16 +2,16 @@ import {BaseModel} from '../base.model';
 
 export class SearchEmployeeResponseModel extends BaseModel {
     id: any;
-    username: any;
-    email: any;
+    username: string;
+    email: string;
     created_date: any;
-    fullName: any;
+    fullName: string;
     is_actived: any;
     last_access: any;
-    phone_number: any;
-    userType: any;
-    role_name: any;
-    department_name: any;
-    leader_id: any;
+    phone_number: string;
+    userType: string;
+    role_name: string;
+    department_name: string;
+    leader_id: number;
 }
 

@@ -38,12 +38,19 @@ export class RegisterComponent implements OnInit {
         }
 
         this.registrationForm = new FormGroup({
-            firstName: new FormControl('', Validators.required),
-            lastName: new FormControl('', Validators.required),
             username: new FormControl('', Validators.required),
+            image: new FormControl('', Validators.required),
+            fullName: new FormControl('', Validators.required),
             email: new FormControl('', [Validators.required, Validators.email]),
-            password: new FormControl('', Validators.required),
-            repeatPassword: new FormControl('', Validators.required)
+            phoneNumber: new FormControl('', Validators.required),
+            skypeAcc: new FormControl('', Validators.required),
+            fbLink: new FormControl('', Validators.required),
+            userType: new FormControl('', Validators.required),
+            address: new FormControl('', Validators.required),
+            education: new FormControl('', Validators.required),
+            university: new FormControl('', Validators.required),
+            faculty: new FormControl('', Validators.required),
+            graduationYear: new FormControl('', Validators.required)
         });
     }
 
@@ -71,7 +78,7 @@ export class RegisterComponent implements OnInit {
                 image: this.registrationForm.controls['image'].value,
                 fullName: this.registrationForm.controls['fullName'].value,
                 email: this.registrationForm.controls['email'].value,
-                phone_number: this.registrationForm.controls['phone'].value,
+                phoneNumber: this.registrationForm.controls['phoneNumber'].value,
                 skypeAcc: this.registrationForm.controls['skypeAcc'].value,
                 fbLink: this.registrationForm.controls['fbLink'].value,
                 userType: this.registrationForm.controls['phone'].value,
