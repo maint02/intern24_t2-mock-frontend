@@ -3,6 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {AuthComponent} from './auth.component';
 import {RegisterComponent} from './register/register.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {ProfileEmpComponent} from './profile-emp/profile-emp.component';
+import {AuthGuard} from '../../_services/guards/auth.guard';
 
 const authRoutes: Routes = [
     {
@@ -20,6 +23,16 @@ const authRoutes: Routes = [
             {
                 path: 'register',
                 component: RegisterComponent
+            },
+            {
+                path: 'changepassword',
+                canActivate: [AuthGuard],
+                component: ChangePasswordComponent
+            },
+            {
+                path: 'profile',
+                canActivate: [AuthGuard],
+                component: ProfileEmpComponent
             }
 
         ]

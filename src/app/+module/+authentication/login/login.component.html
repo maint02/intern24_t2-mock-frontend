@@ -12,14 +12,20 @@
                     <div class="col-7">
                         <div class="input-group">
 
-                            Password:<input class="input--style-4" type="text" name="password" [(ngModel)]="password">
+                            Password:<input class="input--style-4" type="password" name="password" [(ngModel)]="password">
                         </div>
                     </div>
-                    <span>Don't have an Account? <a href="#/register">Register Now</a> </span>
+                    <span>Don't have an Account? <a (click)="onClickRegister()" style="color:red;cursor: pointer;">Register Now</a> </span>
                     <div class="p-t-15">
                         <button class="btn btn--radius-2 btn--blue" type="submit" (click)="onClickLogin()">Login</button>
                     </div>
                 </form>
+                <br>
+                <div align="center">
+                    <span>
+                        <a (click)="onClickGoHome()" style="cursor: pointer; color: blueviolet;">Back to HomePage</a>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

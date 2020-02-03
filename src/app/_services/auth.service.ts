@@ -8,6 +8,7 @@ import {catchError, retry} from 'rxjs/operators';
 import {USER_ID_KEY, USER_ROLE_KEY, USERNAME_KEY} from '../_models/config/local-storage-keys';
 import {API_VERIFY_ACCOUNT} from '../_models/config/api-paths';
 import {Employee} from '../_models/employee.model';
+import {ChangePasswordModel} from '../_models/request/change-password.model';
 
 
 @Injectable(
@@ -40,9 +41,18 @@ export class AuthService {
         return localStorage.getItem(USER_ID_KEY) != null;
     }
 
-    activatedAccount(confirmationToken: string): Observable<any>{
+    activatedAccount(confirmationToken: string): Observable<any> {
         return this.http.get(`${API_VERIFY_ACCOUNT}/${confirmationToken}`);
     }
 
+    changePassword(passwords: ChangePasswordModel) {
+        return this.http.post(`${environment.auth_url}/change-password`, passwords)
+            .pipe(
+                retry(2),
+                catchError(err => {
+                    return throwError(err);
+                })
+            );
+    }
 
 }

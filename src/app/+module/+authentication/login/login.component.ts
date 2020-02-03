@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem(USER_ID_KEY, data.id);
             localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
             localStorage.setItem(USERNAME_KEY, data.username);
-            localStorage.setItem(USER_TOKEN_KEY, data.token.accessToken);
+            localStorage.setItem(USER_TOKEN_KEY, data.employeeToken.accessToken);
 
             this.router.navigate(['']);
         }, error => {
@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/register']);
     }
 
-
+    onClickGoHome(): void{
+        this.router.navigate(['']);
+    }
 }
 

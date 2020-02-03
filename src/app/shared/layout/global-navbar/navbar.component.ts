@@ -1,50 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {AuthenticationService} from '../../../_services/authentication.service';
+import {AuthService} from '../../../_services/auth.service';
+import {USERNAME_KEY} from '../../../_models/config/local-storage-keys';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
 
-  menuHidden = true;
+    menuHidden = true;
 
-  constructor(
-    private router: Router,
-    private i18nService: TranslateService,
-    private authService : AuthenticationService
-  ) {}
+    constructor(
+        private router: Router,
+        private i18nService: TranslateService,
+        private auth: AuthService
+    ) {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
-  toggleMenu() {
-    this.menuHidden = !this.menuHidden;
+    toggleMenu() {
+        this.menuHidden = !this.menuHidden;
+    }
+
+    setLanguage(language: string) {
+        this.i18nService.use(language);
+    }
+
+    logout() {
+        this.auth.logout();
+        this.router.navigate([''], {replaceUrl: true});
+    }
+
+    get currentLanguage(): string {
+        return this.i18nService.currentLang;
+    }
+
+    get languages(): string[] {
+        return this.i18nService.getLangs();
+    }
+
+    getusername(): string | null {
+        return localStorage.getItem(USERNAME_KEY);
+    }
+
+    getProfile() {
+        this.router.navigate(['/profile']);
+    }
+
+  changePassword(){
+      this.router.navigate(['/changepassword']);
   }
-
-  setLanguage(language: string) {
-    this.i18nService.use(language);
-  }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login'], { replaceUrl: true });
-  }
-
-  get currentLanguage(): string {
-    return this.i18nService.currentLang;
-  }
-
-  get languages(): string[] {
-    return this.i18nService.getLangs();
-  }
-
-  get username(): string | null {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    return user ? user.username : null;
-    return null;
-  }
-
 }

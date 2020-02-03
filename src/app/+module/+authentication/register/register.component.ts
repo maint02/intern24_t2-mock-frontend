@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {Employee} from '../../../_models/employee.model';
 import {ApiService} from '../../../_services/api.service';
 import {EmployeeRequestModel} from '../../../_models/request/employee-request.model';
+import {environment} from '../../../../environments/environment';
+import {API_REGISTER_USER} from '../../../_models/config/api-paths';
 
 @Component({
     selector: 'app-register',
@@ -99,6 +101,10 @@ export class RegisterComponent implements OnInit {
 
     onClickSignIn(): void {
         this.router.navigate(['/login']);
+    }
+
+    onClickGoHome(): void {
+        this.router.navigate(['']);
     }
 
     //Employee Info
