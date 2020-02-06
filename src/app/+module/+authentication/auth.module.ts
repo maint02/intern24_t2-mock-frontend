@@ -7,13 +7,12 @@ import {AuthRouting} from './auth-routing';
 import {RegisterComponent} from './register/register.component';
 import { AccountConfirmationComponent } from './account-confirmation/account-confirmation.component';
 import {AuthService} from '../../_services/auth.service';
-import { ProfileEmpComponent } from './profile-emp/profile-emp.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
     imports: [SharedModule, AuthRouting],
     declarations: [AuthComponent,
-        LoginComponent, RegisterComponent, AccountConfirmationComponent, ProfileEmpComponent, ChangePasswordComponent],
+        LoginComponent, RegisterComponent, AccountConfirmationComponent, ChangePasswordComponent],
     exports: [],
     providers: [AuthService]
 })

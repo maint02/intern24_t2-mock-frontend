@@ -1,0 +1,39 @@
+<header class="masthead" style="background-image: url('assets/images/home-bg.jpg'); height: 348px;" >
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading" style="padding-top: 150px;padding-left: 25px">
+                    <h1 style="cursor: context-menu;"> Manager</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto" >
+            <div class="post-preview" *ngFor="let news of newsResponse; let i = index">
+                <a routerLink="/news/{{news.id}}" >
+                    <h2 class="post-title">
+                        {{news.title}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{news.summary}}
+                    </h3>
+                </a>
+                <input [(ngModel)]="news.username" style="display: none;">
+                <p class="post-meta">Posted by
+                    <a href="#" (click)="newsSearch()">{{news.username}}</a> -
+                    {{news.timePost | date:'yyyy/MM/dd'}}</p>
+                <hr>
+            </div>
+            <!-- Pager -->
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

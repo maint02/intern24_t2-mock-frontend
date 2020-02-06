@@ -23,5 +23,4 @@ export class Employee {
     university: string;
     userType: string;
     graduationYear: number;
-    token?: any;
 }

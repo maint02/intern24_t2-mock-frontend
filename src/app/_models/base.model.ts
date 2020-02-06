@@ -1,5 +1,5 @@
 export class BaseModel {
-    page: any;
-    pageSize: any;
-    sort: any;
+    page: number;
+    pageSize: number;
+    sort: number;
 }

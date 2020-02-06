@@ -1,0 +1,182 @@
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10"><h1> </h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"><!--left col-->
+
+
+            <div class="text-center">
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
+                     alt="avatar">
+                <h6>Upload a different photo...</h6>
+                <input type="file" class="text-center center-block file-upload" style="width: 265px;">
+            </div>
+            <hr>
+            <br>
+
+            <ul class="list-group">
+                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Tổng số bài viết</strong></span>
+                    125
+                </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+            </ul>
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm" [formGroup]="editForm"
+                          (ngSubmit)="onSubmit()" class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="username"><h4>Username:</h4></label>
+                                    <input type="text" class="form-control" name="first_name" id="username"
+                                           placeholder="Username" title="enter your first name if any." readonly="true"
+                                           formControlName="username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="fullName"><h4>Full Name:</h4></label>
+                                    <input type="text" class="form-control" name="fullName" id="fullName"
+                                           placeholder="fullName" title="enter your name if any."
+                                           formControlName="fullName">
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+
+                                <div class="col-xs-6">
+                                    <label for="password"><h4>password:</h4></label>
+                                    <input type="text" class="form-control" name="password" id="password"
+                                           placeholder="password" title="enter your last name if any."
+                                           formControlName="password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="birthday"><h4>Birthday:</h4></label>
+                                    <input type="date" class="form-control" name="birthday" id="birthday"
+                                           placeholder="enter birthday" title="enter your birthday if any." formControlName="birthday">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="address"><h4>Address:</h4></label>
+                                    <input type="text" class="form-control" name="address" id="address"
+                                           placeholder="enter address" title="enter your address if any." formControlName="address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="phoneNumber"><h4>Phone Number:</h4></label>
+                                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber"
+                                           placeholder="enter Phone  number" title="enter your mobile number if any." formControlName="phoneNumber">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="skypeAcc"><h4>Skype Links:</h4></label>
+                                    <input type="text" class="form-control" name="skypeAcc" id="skypeAcc"
+                                           placeholder="enter Skype Links" title="enter your Skype Links if any." formControlName="skypeAcc">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="fbLink"><h4>Facebook Links:</h4></label>
+                                    <input type="text" class="form-control" name="fbLink" id="fbLink"
+                                           placeholder="enter Facebook Links" title="enter your Facebook Links if any." formControlName="fbLink">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Email:</h4></label>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           placeholder="you@email.com" title="enter your email." formControlName="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="university"><h4>University:</h4></label>
+                                    <input type="email" class="form-control" id="university" placeholder="university"
+                                           name="university" formControlName="university"
+                                           title="enter a university">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="faculty"><h4>Faculty:</h4></label>
+                                    <input type="text" class="form-control" name="faculty" id="faculty"
+                                           placeholder="faculty" title="enter your university." formControlName="faculty">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="education"><h4>Education:</h4></label>
+                                    <input type="text" class="form-control" name="education" id="education"
+                                           placeholder="education" title="enter your education." formControlName="education">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="graduationYear"><h4>GraduationYear:</h4></label>
+                                    <input type="number" class="form-control" name="graduationYear" id="graduationYear" [maxLength]="4"
+                                           placeholder="graduationYear" title="enter your graduationYear." formControlName="graduationYear">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="userType"><h4>Loại người dùng:</h4></label>
+                                    <input type="text" class="form-control" name="userType" id="userType"
+                                           placeholder="userType" title="enter your userType." formControlName="userType">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="createdDate"><h4>Ngày tạo:</h4></label>
+                                    <input type="date" class="form-control" name="createdDate" id="createdDate"
+                                           placeholder="userType" title="enter your userType." formControlName="createdDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit"><i
+                                        class="glyphicon glyphicon-ok-sign"></i> Save
+                                </button>
+                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
+                                    Reset
+                                </button>
+
+                                <span>Go to list <a routerLink="/employee" style="color: red;">Employee</a></span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                </div><!--/tab-pane-->
+
+            </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+</div>

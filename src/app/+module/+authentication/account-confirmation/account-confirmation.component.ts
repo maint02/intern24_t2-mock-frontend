@@ -19,16 +19,19 @@ export class AccountConfirmationComponent implements OnInit {
     ) {
         this.activatedRoute.queryParams.subscribe(params => {
             this.confirmationToken = params['token'];
+            console.log('confirmationToken 111: '+this.confirmationToken);
             this.activateAccount();
         });
     }
 
     ngOnInit() {
+        console.log('Account - Confirmation!');
     }
 
     activateAccount() {
         this.auth.activatedAccount(this.confirmationToken).subscribe(data => {
             this.toastr.success('Your account has been activated!');
+            console.log('activated!');
             this.router.navigate(['/login']);
         }, error => {
             this.toastr.error('There was an error while activating your account.');

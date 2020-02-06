@@ -1,119 +1,132 @@
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
     <div class="wrapper wrapper--w680">
         <div class="card card-4">
-            <div class="card-body">
-                <h2 class="title">Registration Account!</h2>
-                <form [formGroup]="registrationForm" (ngSubmit)="onRegisterSubmit()" enctype="multipart/form-data">
-                    <div class="row row-space">
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Username:</label>
-                                <input class="input--style-4" type="text" name="username" formControlName="username">
+            <ng-template [ngIf]="isUserInfoSent" [ngIfElse]="isUserNotSent">
+                <h2>Account activation</h2>
+                <p>Check out your email for activation link. After activation you can use this account.</p>
+            </ng-template>
+            <ng-template #isUserNotSent>
+                <div class="card-body">
+                    <h2 class="title">Registration Account!</h2>
+                    <form [formGroup]="registrationForm" (ngSubmit)="onRegisterSubmit()" enctype="multipart/form-data">
+                        <div class="row row-space">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Username:</label>
+                                    <input class="input--style-4" type="text" name="username"
+                                           formControlName="username">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Full Name:</label>
+                                    <input class="input--style-4" type="text" name="fullName"
+                                           formControlName="fullName">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Full Name:</label>
-                                <input class="input--style-4" type="text" name="fullName" formControlName="fullName">
+<!--                        <div class="row row-space">-->
+<!--                            <div class="col-5">-->
+<!--                                <label class="label">Avatar:</label>-->
+<!--                                <input type="file" (change)="onFileChanged($event)">-->
+<!--                                <img [src]="imgURL" height="200" *ngIf="imgURL">-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="row row-space">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Email:</label>
+                                    <input class="input--style-4" type="email" name="email" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Phone Number:</label>
+                                    <input class="input--style-4" type="text" name="phone"
+                                           formControlName="phoneNumber">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-5">
-                            <label class="label">Avatar:</label>
-                            <input type="file" (change)="onFileChanged($event)">
-                            <img [src]="imgURL" height="200" *ngIf="imgURL">
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Email:</label>
-                                <input class="input--style-4" type="email" name="email" formControlName="email">
+                        <div class="row row-space">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Skype link Profile:</label>
+                                    <input class="input--style-4" type="email" name="skypeAcc"
+                                           formControlName="skypeAcc">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Facebook link Profile:</label>
+                                    <input class="input--style-4" type="text" name="fbLink" formControlName="fbLink">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Phone Number:</label>
-                                <input class="input--style-4" type="text" name="phone" formControlName="phoneNumber">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Skype link Profile:</label>
-                                <input class="input--style-4" type="email" name="skypeAcc"  formControlName="skypeAcc">
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">Facebook link Profile:</label>
-                                <input class="input--style-4" type="text" name="fbLink" formControlName="fbLink">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label class="label">UserType:</label>
-                        <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="userType" formControlName="userType">
-                                <option>Nhân viên</option>
-                                <option>Thử việc</option>
-                                <option>Học việc</option>
-                                <option>Sinh viên</option>
-                            </select>
-                            <div class="select-dropdown"></div>
-                        </div>
-                    </div>
-                    <div class="col-5">
                         <div class="input-group">
-                            <label class="label">Address:</label>
-                            <input class="input--style-4" type="text" name="address" formControlName="address">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label class="label">Học Vấn:</label>
-                        <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="education" formControlName="education">
-                                <option>Cao Đẳng</option>
-                                <option>Đại Học</option>
-                                <option>Tiến Sĩ</option>
-                            </select>
-                            <div class="select-dropdown"></div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-5">
-                            <div class="input-group">
-                                <label class="label">University:</label>
-                                <input class="input--style-4" type="text" name="university" formControlName="university">
+                            <label class="label">UserType:</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="userType" formControlName="userType">
+                                    <option>Nhân viên</option>
+                                    <option>Thử việc</option>
+                                    <option>Học việc</option>
+                                    <option>Sinh viên</option>
+                                </select>
+                                <div class="select-dropdown"></div>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="input-group">
-                                <label class="label">Faculty:</label>
-                                <input class="input--style-4" type="text" name="faculty" formControlName="faculty">
+                                <label class="label">Address:</label>
+                                <input class="input--style-4" type="text" name="address" formControlName="address">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-5">
                         <div class="input-group">
-                            <label class="label">GraduationYear</label>
-                            <input class="input--style-4" type="text" name="graduationYear" formControlName="graduationYear">
+                            <label class="label">Học Vấn:</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="education" formControlName="education">
+                                    <option>Cao Đẳng</option>
+                                    <option>Đại Học</option>
+                                    <option>Tiến Sĩ</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
                         </div>
-                    </div>
-                    <span>Already have account! Please <a (click)="onClickSignIn()" style="color: red;cursor: pointer;">Login</a> </span>
-                    <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--blue" type="submit">Register</button>
-                    </div>
-                </form>
-                <br>
-                <div align="center">
+                        <div class="row row-space">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">University:</label>
+                                    <input class="input--style-4" type="text" name="university"
+                                           formControlName="university">
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Faculty:</label>
+                                    <input class="input--style-4" type="text" name="faculty" formControlName="faculty">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="input-group">
+                                <label class="label">GraduationYear</label>
+                                <input class="input--style-4" type="text" name="graduationYear"
+                                       formControlName="graduationYear">
+                            </div>
+                        </div>
+                        <span>Already have account! Please <a (click)="onClickSignIn()"
+                                                              style="color: red;cursor: pointer;">Login</a> </span>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Register</button>
+                        </div>
+                    </form>
+                    <br>
+                    <div align="center">
                     <span>
                         <a (click)="onClickGoHome()" style="cursor: pointer; color: blueviolet;">Back to HomePage</a>
                     </span>
+                    </div>
                 </div>
-            </div>
+            </ng-template>
         </div>
     </div>
 </div>

@@ -3,6 +3,12 @@ import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../../../_services/auth.service';
 import {USERNAME_KEY} from '../../../_models/config/local-storage-keys';
+import {NewsCategory} from '../../../_models/news-category';
+import {ApiService} from '../../../_services/api.service';
+import {throwError} from 'rxjs';
+import {HomeComponent} from '../../../+module/+home/home.component';
+import {GuardsGuard} from '../../../_services/guards/guards.guard';
+import {NewsComponent} from '../../../+module/+home/news/news.component';
 
 @Component({
     selector: 'app-navbar',
@@ -11,37 +17,27 @@ import {USERNAME_KEY} from '../../../_models/config/local-storage-keys';
 })
 export class NavbarComponent implements OnInit {
 
+
     menuHidden = true;
+
+    category: NewsCategory[] = [];
 
     constructor(
         private router: Router,
-        private i18nService: TranslateService,
-        private auth: AuthService
+        private auth: AuthService,
+        private apiService: ApiService,
+        private guards: GuardsGuard,
+        private newComponent: NewsComponent
     ) {
     }
 
     ngOnInit() {
-    }
-
-    toggleMenu() {
-        this.menuHidden = !this.menuHidden;
-    }
-
-    setLanguage(language: string) {
-        this.i18nService.use(language);
+        this.getAllCategory();
     }
 
     logout() {
         this.auth.logout();
         this.router.navigate([''], {replaceUrl: true});
-    }
-
-    get currentLanguage(): string {
-        return this.i18nService.currentLang;
-    }
-
-    get languages(): string[] {
-        return this.i18nService.getLangs();
     }
 
     getusername(): string | null {
@@ -52,7 +48,33 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/profile']);
     }
 
-  changePassword(){
-      this.router.navigate(['/changepassword']);
-  }
+    changePassword() {
+        this.router.navigate(['/changepassword']);
+    }
+
+    getAllCategory(): void {
+        this.apiService.get('/newCategory/all').subscribe(res => {
+            if (res.code === '00') {
+                this.category = res.datas;
+            }
+        },error => {
+            return throwError(error);
+        });
+    }
+
+    getCategoryById(id: any): void {
+        this.apiService.get('/newCategory/all/:id', id).subscribe(
+            data => {
+                this.router.navigate(['/news/',id]);
+            }, error => {
+                return throwError(error);
+            }
+        );
+    }
+    goToEmployee(){
+        this.router.navigate(['/employee']);
+    }
+    doSearch() {
+         this.newComponent.newsSearch();
+    }
 }

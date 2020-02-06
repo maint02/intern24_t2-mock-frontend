@@ -3,7 +3,8 @@ import {SharedModule} from '../../shared/shared.module';
 import {HomeComponent} from './home.component';
 import {HomeRouting} from './home-routing';
 import {MonitorComponent} from './monitor/monitor.component';
-import { HomepageComponent } from './homepage/homepage.component';
+import { NewsComponent } from './news/news.component';
+import { NewsDetailComponent } from './news-detail/news-detail.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { HomepageComponent } from './homepage/homepage.component';
   declarations: [
     HomeComponent,
     MonitorComponent,
-    HomepageComponent
+    NewsComponent,
+    NewsDetailComponent
   ],
   exports: []
 })

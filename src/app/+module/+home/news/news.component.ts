@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {NewsCategory} from '../../_models/news-category';
-import {ApiService} from '../../_services/api.service';
+import {NewsResponse} from '../../../_models/response/news-response';
+import {SearchNews} from '../../../_models/request/search-news';
+import {NewsCategory} from '../../../_models/news-category';
+import {ApiService} from '../../../_services/api.service';
 import {Router} from '@angular/router';
-import {NewsResponse} from '../../_models/response/news-response';
-import {SearchNews} from '../../_models/request/search-news';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    selector: 'app-news',
+    templateUrl: './news.component.html',
+    styleUrls: ['./news.component.css']
 })
-export class HomeComponent implements OnInit {
-    newsResponse: NewsResponse[] = [];
+export class NewsComponent implements OnInit {
+    newsResponse: NewsResponse;
     searchNews: SearchNews = new SearchNews();
 
     category: NewsCategory[] = [];
@@ -32,27 +32,25 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.searchNews.page = 0;
         this.searchNews.pageSize = 5;
-       console.log('Home init');
-    }
-
-    newsSearch(): void {
+        this.newsSearch();
         this.searchNews.page = this.pageOptions.page;
         this.searchNews.pageSize = this.pageOptions.pageSize;
+        console.log('news init');
+    }
+
+    newsSearch() {
         this.apiService.post('/news/allByParams', this.searchNews).subscribe(data => {
             if (data.code === '00') {
                 this.newsResponse = data.datas;
                 this.pageOptions.totalRows = data.totalRows;
                 this.pageOptions.totalPages = data.totalPages;
+                console.log(this.newsResponse);
             }
         });
     }
 
-    getAllCategory(): void {
-        this.apiService.get('/newCategory/all').subscribe(res => {
-            if (res.code === '00') {
-                console.log(res);
-                this.category = res.datas;
-            }
-        });
-    }
+    // getDetail(id: any) {
+    //     this.router.navigate(['/news/', id]);
+    // }
+
 }

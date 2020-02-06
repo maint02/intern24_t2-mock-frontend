@@ -25,7 +25,8 @@ export class ChangePasswordComponent implements OnInit {
     ngOnInit() {
         this.passwordForm = new FormGroup({
             oldPassword: new FormControl('', Validators.required),
-            newPassword: new FormControl('', Validators.required)
+            newPassword: new FormControl('', Validators.required),
+            rePassword: new FormControl('', Validators.required)
         });
     }
 
@@ -36,6 +37,11 @@ export class ChangePasswordComponent implements OnInit {
         }
         const oldPassword = this.passwordForm.controls['oldPassword'].value;
         const newPassword = this.passwordForm.controls['newPassword'].value;
+        const rePassword = this.passwordForm.controls['rePassword'].value;
+        if (newPassword !== rePassword) {
+            this.toastr.error('Password not match');
+            return;
+        }
 
         const passwords: ChangePasswordModel = {
             oldPassword: oldPassword,

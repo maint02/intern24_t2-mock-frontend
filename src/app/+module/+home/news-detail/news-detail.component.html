@@ -1,0 +1,22 @@
+<div class="container" style="padding-top: 73px">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto" >
+            <div class="post-preview" >
+                <h1>{{news?.newsCategoryName}}</h1>
+                <p class="post-meta">Posted by
+                    <a href="#" >{{news?.username}}</a>
+                    {{news?.timePost | date:'yyyy/MM/dd'}}</p>
+                <hr>
+                    <h1 class="post-title">
+                        {{news?.title}}
+                    </h1>
+                    <h3 class="post-subtitle">
+                        {{news?.summary}}
+                    </h3>
+                    <br>
+                <span>{{news?.content}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

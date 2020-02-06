@@ -3,11 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../_services/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {Employee} from '../../../_models/employee.model';
 import {ApiService} from '../../../_services/api.service';
 import {EmployeeRequestModel} from '../../../_models/request/employee-request.model';
-import {environment} from '../../../../environments/environment';
-import {API_REGISTER_USER} from '../../../_models/config/api-paths';
 
 @Component({
     selector: 'app-register',
@@ -19,6 +16,7 @@ export class RegisterComponent implements OnInit {
     registrationForm: FormGroup;
     selectedFile: File;
     imgURL: any;
+    // isUserNotSent: boolean = false;
     retrievedImage: any;
     base64Data: any;
     retrieveResonse: any;
@@ -41,7 +39,6 @@ export class RegisterComponent implements OnInit {
 
         this.registrationForm = new FormGroup({
             username: new FormControl('', Validators.required),
-            image: new FormControl('', Validators.required),
             fullName: new FormControl('', Validators.required),
             email: new FormControl('', [Validators.required, Validators.email]),
             phoneNumber: new FormControl('', Validators.required),
@@ -54,11 +51,6 @@ export class RegisterComponent implements OnInit {
             faculty: new FormControl('', Validators.required),
             graduationYear: new FormControl('', Validators.required)
         });
-    }
-
-    public onFileChanged(event) {
-        //Select File
-        this.selectedFile = event.target.files[0];
     }
 
     onRegisterSubmit(): void {
@@ -77,24 +69,25 @@ export class RegisterComponent implements OnInit {
 
         const userInfo: EmployeeRequestModel = {
                 username: this.registrationForm.controls['username'].value,
-                image: this.registrationForm.controls['image'].value,
                 fullName: this.registrationForm.controls['fullName'].value,
                 email: this.registrationForm.controls['email'].value,
                 phoneNumber: this.registrationForm.controls['phoneNumber'].value,
                 skypeAcc: this.registrationForm.controls['skypeAcc'].value,
                 fbLink: this.registrationForm.controls['fbLink'].value,
-                userType: this.registrationForm.controls['phone'].value,
+                userType: this.registrationForm.controls['userType'].value,
                 address: this.registrationForm.controls['address'].value,
                 education: this.registrationForm.controls['education'].value,
                 university: this.registrationForm.controls['university'].value,
                 faculty: this.registrationForm.controls['faculty'].value,
-                graduationYear: this.registrationForm.controls['graduationYear'].value,
+                graduationYear: this.registrationForm.controls['graduationYear'].value
             }
         ;
 
         this.apiService.post('/employee/add', userInfo).subscribe(data => {
             this.isUserInfoSent = true;
+            // this.isUserNotSent = true;
         }, error => {
+            // this.isUserNotSent = false;
             this.toastr.error('There was an error while adding your account. Try again later.');
         });
     }

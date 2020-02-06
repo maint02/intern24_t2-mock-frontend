@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ApiService} from '../_services/api.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationModule} from 'ngx-bootstrap';
+import {NewsComponent} from '../+module/+home/news/news.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -63,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgxPaginationModule,
         PaginationModule
     ],
-    providers: [ApiService]
+    providers: [ApiService, NewsComponent]
 })
 export class SharedModule {
     constructor(private translate: TranslateService) {

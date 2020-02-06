@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LoginRequestModel} from '../_models/request/login-request.model';
-import {Observable, throwError} from 'rxjs';
-import {Environment} from '@angular/compiler-cli/src/ngtsc/typecheck/src/environment';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, retry} from 'rxjs/operators';
-import {USER_ID_KEY, USER_ROLE_KEY, USERNAME_KEY} from '../_models/config/local-storage-keys';
+import {USER_ID_KEY, USER_ROLE_KEY, USER_TOKEN_KEY, USERNAME_KEY} from '../_models/config/local-storage-keys';
 import {API_VERIFY_ACCOUNT} from '../_models/config/api-paths';
-import {Employee} from '../_models/employee.model';
 import {ChangePasswordModel} from '../_models/request/change-password.model';
+import {JwtResponse} from '../_models/response/jwt-response';
 
 
 @Injectable(
@@ -17,7 +16,9 @@ import {ChangePasswordModel} from '../_models/request/change-password.model';
     }
 )
 export class AuthService {
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient
+      ) {
 
     }
 
@@ -34,7 +35,7 @@ export class AuthService {
         localStorage.removeItem(USER_ID_KEY);
         localStorage.removeItem(USER_ROLE_KEY);
         localStorage.removeItem(USERNAME_KEY);
-        localStorage.removeItem(USERNAME_KEY);
+        localStorage.removeItem(USER_TOKEN_KEY);
     }
 
     isLoggedIn(): boolean {

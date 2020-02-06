@@ -5,6 +5,7 @@ export const API_REGISTER_USER = API_BASE + '/api/employee/add';
 export const API_VERIFY_ACCOUNT = API_BASE + '/api/employee/public/verify-account';
 export const API_MY_PROFILE = API_BASE + '/api/employee/my-profile';
 export const API_USER_PASSWORD_CHANGE = API_BASE + '/auth/change-password';
+export const API_USER_GETALL = API_BASE + '/api/employee/getAll-by-params';
 
 export const API_NEWS = API_BASE + '/api/news';
 export const API_NEWS_ADD = API_BASE + '/api/news/add';

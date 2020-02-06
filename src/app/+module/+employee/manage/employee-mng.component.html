@@ -1,29 +1,15 @@
+<h1>Go to HomePage <a routerLink="" style="color: red">Home</a></h1>
+
 <div class="form-group">
     <div class="form-group" style="padding: 0px 15px">
-        <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <span>Ho ten</span>
+        <div class="row" style="padding-top: 70px;">
+            <div class="col-md-6 col-sm-6 float-right">
+                <span style="float: right;padding-top: 5px">Họ Tên :</span>
             </div>
             <div class="col-md-6 col-sm-6">
-                <input placeholder="Nhập họ tên" class="form-control" [(ngModel)]="searchResponseModel.fullname" >
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <span>Địa chỉ</span>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <input placeholder="Nhập username" class="form-control" [(ngModel)]="searchResponseModel.username" >
+                <input placeholder="Nhập họ tên" class="form-control" [(ngModel)]="searchResponseModel.fullName">
             </div>
         </div>
-<!--        <div class="row">-->
-<!--            <div class="col-md-6 col-sm-6">-->
-<!--                <span>Phòng ban</span>-->
-<!--            </div>-->
-<!--            <div class="col-md-6 col-sm-6">-->
-<!--                <input placeholder="Nhập phòng ban" class="form-control" [(ngModel)]="searchResponseModel.userType" >-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
     <div class="form-group text-center">
         <button (click)="doSearch()" class="btn btn-primary">Search</button>
@@ -48,16 +34,15 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let u of employee; let i = index">
-                    <td class="text-center"> {{i+1 +(pageOptions.page * pageOptions.pageSize)}} </td>
+                    <td class="text-center"> {{i + 1 + (pageOptions.page * pageOptions.pageSize)}} </td>
                     <td> {{u.username}} </td>
-<!--                    <td> {{u.gender === 0 ? 'Nu' :'Nam'}} </td>-->
                     <td>{{u.fullName}}</td>
                     <td> {{u.email}} </td>
-                    <td> {{u.phone_number}} </td>
-                    <td> {{u.role_name}} </td>
-                    <td> {{u.department_name}} </td>
-                    <td> {{u.is_actived}} </td>
-                    <td> {{u.created_date | date:'yyyy/mm/dd'}} </td>
+                    <td> {{u.phoneNumber}} </td>
+                    <td> {{u.roleName}} </td>
+                    <td> {{u.departmentName}} </td>
+                    <td> {{u.isActived}} </td>
+                    <td> {{u.createdDate | date:'yyyy/MM/dd'}} </td>
                     <td class="text-center">
                         <div class="btn-group">
                             <button
@@ -65,29 +50,36 @@
                                 <i class="fa fa-eye"></i>
                                 <span class="d-none d-md-inline">View</span>
                             </button>
-                            <button type="submit"
+                            <button type="submit" (click)="viewOrEditUser(u)"
                                     class="btn btn-primary btn-sm">
                                 <i class="fa fa-pencil"></i>
                                 <span class="d-none d-md-inline">Edit</span>
                             </button>
-                            <button type="submit"
-                                    class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i>
-                                <span class="d-none d-md-inline">Delete</span>
-                            </button>
+                            <form>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Delete</label>
+                                </div>
+                            </form>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <pagination [boundaryLinks]="true"
-                        [totalItems]="pageOptions.totalRows"
-                        [itemsPerPage]="pageOptions.pageSize"
-                        [maxSize]="pageOptions.pageSize"
-                        (pageChanged)="onPageChanged($event)"
-                        previousText="&lsaquo;"
-                        nextText="&rsaquo;" firstText="&laquo;"
-                        lastText="&raquo;"></pagination>
+            <div style="display: flex;">
+
+                    <pagination [boundaryLinks]="true"
+                                [totalItems]="pageOptions.totalRows"
+                                [itemsPerPage]="pageOptions.pageSize"
+                                [maxSize]="pageOptions.pageSize"
+                                (pageChanged)="onPageChanged($event)"
+                                previousText="&lsaquo;"
+                                nextText="&rsaquo;" firstText="&laquo;"
+                                lastText="&raquo;"
+                                style="width: 700px"
+                    ></pagination>
+                    <button class="btn btn-danger" style="margin-left: 734px;border: 0px">Delete</button>
+            </div>
         </div>
         <br>
     </div>

@@ -1,16 +1,15 @@
 export class EmployeeRequestModel {
     username: string;
-    image: string;
-    address: string;
     email: string;
-    fullName: string;
-    phoneNumber: number;
-    fbLink: string;
-    faculty: string;
+    address: string;
     education: string;
+    faculty: string;
+    fbLink: number;
+    fullName: string;
+    graduationYear: string;
+    phoneNumber: string;
     skypeAcc: string;
     university: string;
-    userType: string;
-    graduationYear: number;
-    token?: any;
+    userType: number;
 }
+

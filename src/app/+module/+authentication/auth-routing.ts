@@ -4,8 +4,9 @@ import {LoginComponent} from './login/login.component';
 import {AuthComponent} from './auth.component';
 import {RegisterComponent} from './register/register.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
-import {ProfileEmpComponent} from './profile-emp/profile-emp.component';
 import {AuthGuard} from '../../_services/guards/auth.guard';
+import {API_VERIFY_ACCOUNT} from '../../_models/config/api-paths';
+import {AccountConfirmationComponent} from './account-confirmation/account-confirmation.component';
 
 const authRoutes: Routes = [
     {
@@ -30,10 +31,14 @@ const authRoutes: Routes = [
                 component: ChangePasswordComponent
             },
             {
-                path: 'profile',
-                canActivate: [AuthGuard],
-                component: ProfileEmpComponent
+                path: 'verify-account',
+                component: AccountConfirmationComponent
             }
+            // {
+            //     path: 'profile',
+            //     canActivate: [AuthGuard],
+            //     component: ProfileEmpComponent
+            // }
 
         ]
     }
