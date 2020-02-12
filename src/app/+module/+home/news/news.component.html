@@ -19,13 +19,13 @@
                     <h2 class="post-title">
                         {{news.title}}
                     </h2>
-                    <h3 class="post-subtitle">
+                    <h4 class="post-subtitle" >
                         {{news.summary}}
-                    </h3>
+                    </h4>
                 </a>
                 <input [(ngModel)]="news.username" style="display: none;">
                 <p class="post-meta">Posted by
-                    <a href="#" (click)="newsSearch()">{{news.username}}</a> -
+                    <a href="#" (click)="newsSearch()">{{news.username}}</a> --
                     {{news.timePost | date:'yyyy/MM/dd'}}</p>
                 <hr>
             </div>

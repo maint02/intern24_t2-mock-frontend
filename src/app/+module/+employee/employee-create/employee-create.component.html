@@ -1,0 +1,362 @@
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10"><h1></h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"><!--left col-->
+
+
+            <div class="text-center">
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
+                     alt="avatar">
+                <h6>Upload a different photo...</h6>
+                <input type="file" class="text-center center-block file-upload" style="width: 265px;">
+            </div>
+            <hr>
+            <br>
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm" [formGroup]="addForm"
+                          (ngSubmit)="onCreate()" class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Username(*):</h4></label>
+                                    <input type="text" class="form-control" name="first_name" id="username"
+                                           placeholder="Enter your username..." title="enter your first name if any."
+                                           formControlName="username">
+                                </div>
+                                <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)">
+                                    <div *ngIf="f.username.errors.required" class="help text-danger">Username is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Password(*):</h4></label>
+                                    <input type="password" class="form-control" name="password" id="password"
+                                           placeholder="Enter your password..." title="enter your last name if any."
+                                           formControlName="password">
+                                </div>
+                                <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                                    <div class="help text-danger" *ngIf="f.password.errors.required">password is
+                                        required!
+                                    </div>
+                                    <div class="help text-danger" *ngIf="f.password.errors.pattern">Password minimum
+                                        eight characters, at least one letter and one number
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="fullName"><h4>Họ và Tên(*):</h4></label>
+                                    <input type="text" class="form-control" name="fullName" id="fullName"
+                                           placeholder="Enter your fullname..." title="enter your name if any."
+                                           formControlName="fullName">
+                                </div>
+                                <div *ngIf="f.fullName.invalid && (f.fullName.dirty || f.fullName.touched)">
+                                    <div class="help text-danger" *ngIf="f.fullName.errors.required">fullName is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="birthday"><h4>Ngày sinh(*):</h4></label>
+                                    <input type="date" class="form-control" name="birthday" id="birthday"
+                                           placeholder="Enter your birthday..." title="enter your birthday if any."
+                                           formControlName="birthday">
+                                </div>
+                                <div *ngIf="f.birthday.invalid && (f.birthday.dirty || f.birthday.touched)">
+                                    <div class="help text-danger" *ngIf="f.birthday.errors.required">birthday is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="address"><h4>Địa chỉ(*):</h4></label>
+                                    <input type="text" class="form-control" name="address" id="address"
+                                           placeholder="Enter your address..." title="enter your address if any."
+                                           formControlName="address">
+                                </div>
+                                <div *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)">
+                                    <div class="help text-danger" *ngIf="f.address.errors.required">address is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="phoneNumber"><h4>Số điện thoại(*):</h4></label>
+                                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber"
+                                           placeholder="Enter your phoneNumber..." title="enter your mobile number if any."
+                                           formControlName="phoneNumber">
+                                </div>
+                                <div *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
+                                    <div class="help text-danger" *ngIf="f.phoneNumber.errors.required">phoneNumber is
+                                        required!
+                                    </div>
+                                    <div class="help text-danger" *ngIf="f.phoneNumber.errors.minlength">phoneNumber
+                                        must be at least 10 character!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="skypeAcc"><h4>Skype Links(*):</h4></label>
+                                    <input type="text" class="form-control" name="skypeAcc" id="skypeAcc"
+                                           placeholder="Enter your Skype Links..." title="enter your Skype Links if any."
+                                           formControlName="skypeAcc">
+                                </div>
+                                <div *ngIf="f.skypeAcc.invalid && (f.skypeAcc.dirty || f.skypeAcc.touched)">
+                                    <div class="help text-danger" *ngIf="f.skypeAcc.errors.required">Skype Links is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="fbLink"><h4>Facebook Links(*):</h4></label>
+                                    <input type="text" class="form-control" name="fbLink" id="fbLink"
+                                           placeholder="Enter your Facebook Links..." title="enter your Facebook Links if any."
+                                           formControlName="fbLink">
+                                </div>
+                                <div *ngIf="f.fbLink.invalid && (f.fbLink.dirty || f.fbLink.touched)">
+                                    <div class="help text-danger" *ngIf="f.fbLink.errors.required">Facebook Links is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Please select your actived</label>
+                                <div class="row">
+                                    <label class="md-check">
+                                        <input type="radio" value="true" name="actived" formControlName="actived">
+                                        True
+                                    </label>
+
+                                    <label class="md-check">
+                                        <input type="radio" value="false" name="actived" formControlName="actived">
+                                        False
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Please select your Leader</label>
+                                <div class="row">
+                                    <label class="md-check">
+                                        <input type="radio" value="true" name="leader" formControlName="leader">
+                                        True
+                                    </label>
+
+                                    <label class="md-check">
+                                        <input type="radio" value="false" name="leader" formControlName="leader">
+                                        False
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Email(*)</h4></label>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           placeholder="you@email.com" title="enter your email."
+                                           formControlName="email">
+                                </div>
+                                <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                                    <div class="help text-danger" *ngIf="f.email.errors.required">email is required!
+                                    </div>
+                                    <div class="help text-danger" *ngIf="f.email.errors.pattern">Invalid email!</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="university"><h4>Trường học(*):</h4></label>
+                                    <input type="email" class="form-control" id="university" placeholder="Enter your university..."
+                                           name="university" formControlName="university"
+                                           title="enter a university">
+                                </div>
+                                <div *ngIf="f.university.invalid && (f.university.dirty || f.university.touched)">
+                                    <div class="help text-danger" *ngIf="f.university.errors.required">university is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="faculty"><h4>Khoa(*):</h4></label>
+                                    <input type="text" class="form-control" name="faculty" id="faculty"
+                                           placeholder="Enter your faculty..." title="enter your university."
+                                           formControlName="faculty">
+                                </div>
+                                <div *ngIf="f.faculty.invalid && (f.faculty.dirty || f.faculty.touched)">
+                                    <div class="help text-danger" *ngIf="f.faculty.errors.required">faculty is
+                                        required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Loại giáo dục(*):</h4></label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="education" formControlName="education">
+                                            <option>Đại Học</option>
+                                            <option>Cao đẳng</option>
+                                            <option>Trung cấp</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                        <div *ngIf="f.education.invalid && (f.education.dirty || f.education.touched)">
+                                            <div class="help text-danger" *ngIf="f.education.errors.required">education
+                                                is required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="graduationYear"><h4>Năm tốt nghiệp(*):</h4></label>
+                                    <input type="number" class="form-control" name="graduationYear" id="graduationYear"
+                                           [maxLength]="4" maxlength="4"
+                                           placeholder="Enter your graduationYear..." title="enter your graduationYear."
+                                           formControlName="graduationYear">
+                                </div>
+                                <div *ngIf="f.graduationYear.invalid && (f.graduationYear.dirty || f.graduationYear.touched)">
+                                    <div class="help text-danger" *ngIf="f.graduationYear.errors.required">
+                                        graduationYear is required!
+                                    </div>
+                                    <div class="help text-danger" *ngIf="f.graduationYear.errors.maxLength">
+                                        The graduation year must be a maximum of 4 characters!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Loại người dùng(*):</h4></label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="userType" formControlName="userType">
+                                            <option>Nhân viên</option>
+                                            <option>Thử việc</option>
+                                            <option>Học việc</option>
+                                            <option>Sinh viên</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                        <div *ngIf="f.userType.invalid && (f.userType.dirty || f.userType.touched)">
+                                            <div class="help text-danger" *ngIf="f.userType.errors.required">userType is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Phòng ban:</h4></label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="department" formControlName="department">
+                                            <option>Tester</option>
+                                            <option>Developer</option>
+                                            <option>Human Resources</option>
+                                            <option>Manager</option>
+                                            <option>Admin</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                        <div *ngIf="f.department.invalid && (f.department.dirty || f.department.touched)">
+                                            <div class="help text-danger" *ngIf="f.department.errors.required">department is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label><h4>Phân quyền(*):</h4></label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="role" formControlName="role">
+                                            <option>PUBLIC</option>
+                                            <option>MANAGER</option>
+                                            <option>LEADER</option>
+                                            <option>MEMBER</option>
+                                            <option>HR</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                        <div *ngIf="f.role.invalid && (f.role.dirty || f.role.touched)">
+                                            <div class="help text-danger" *ngIf="f.role.errors.required">role is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Chức vụ(*):</h4></label>
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="position" formControlName="position">
+                                            <option>Nhân viên</option>
+                                            <option>Trưởng nhóm</option>
+                                            <option>Quản lý</option>
+                                            <option>Nhân sự</option>
+                                            <option>Kế toán</option>
+                                        </select>
+                                        <div class="select-dropdown"></div>
+                                        <div *ngIf="f.position.invalid && (f.position.dirty || f.position.touched)">
+                                            <div class="help text-danger" *ngIf="f.position.errors.required">position is
+                                                required!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Please select your manager</label>
+                                <div class="row">
+                                    <label class="md-check">
+                                        <input type="radio" value="true" name="manager" formControlName="manager">
+                                        True
+                                    </label>
+
+                                    <label class="md-check">
+                                        <input type="radio" value="false" name="manager" formControlName="manager">
+                                        False
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit"><i
+                                        class="glyphicon glyphicon-ok-sign"></i> Save
+                                </button>
+
+                                <p></p>         <span>Go to list <a routerLink="/employee"
+                                                                    style="color: red;">Employee</a></span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                </div><!--/tab-pane-->
+
+            </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+</div>

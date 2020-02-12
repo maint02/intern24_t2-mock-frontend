@@ -3,8 +3,8 @@ import {SharedModule} from '../../shared/shared.module';
 import {EmployeeComponent} from './employee.component';
 import {EmployeeRouting} from './employee.routing';
 import {EmployeeMngComponent} from './manage/employee-mng.component';
-import { ProfileComponent } from './profile/profile.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
+import { EmployeeCreateComponent } from './employee-create/employee-create.component';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
   declarations: [
     EmployeeComponent,
     EmployeeMngComponent,
-    ProfileComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    EmployeeCreateComponent
   ],
   exports: []
 })

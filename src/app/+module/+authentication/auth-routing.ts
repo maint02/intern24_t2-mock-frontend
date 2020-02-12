@@ -7,6 +7,7 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import {AuthGuard} from '../../_services/guards/auth.guard';
 import {API_VERIFY_ACCOUNT} from '../../_models/config/api-paths';
 import {AccountConfirmationComponent} from './account-confirmation/account-confirmation.component';
+import {ForgotPwComponent} from './forgot-pw/forgot-pw.component';
 
 const authRoutes: Routes = [
     {
@@ -33,12 +34,11 @@ const authRoutes: Routes = [
             {
                 path: 'verify-account',
                 component: AccountConfirmationComponent
+            },
+            {
+                path: 'forgot-password',
+                component: ForgotPwComponent
             }
-            // {
-            //     path: 'profile',
-            //     canActivate: [AuthGuard],
-            //     component: ProfileEmpComponent
-            // }
 
         ]
     }

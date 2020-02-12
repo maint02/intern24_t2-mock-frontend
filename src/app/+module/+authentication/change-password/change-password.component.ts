@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../_services/auth.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -14,34 +14,52 @@ export class ChangePasswordComponent implements OnInit {
 
     passwordForm: FormGroup;
 
-
+    messege ='';
     constructor(
         private auth: AuthService,
         private router: Router,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private fb: FormBuilder
     ) {
     }
 
     ngOnInit() {
-        this.passwordForm = new FormGroup({
-            oldPassword: new FormControl('', Validators.required),
-            newPassword: new FormControl('', Validators.required),
-            rePassword: new FormControl('', Validators.required)
-        });
+        this.passwordForm = this.fb.group({
+            oldPassword:[ '', Validators.required],
+            newPassword: ['', [Validators.required,Validators.minLength(8),Validators.pattern(
+                new RegExp('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')
+            )]],
+            rePassword: ['', Validators.required]
+        }, {updateOn: 'blur'});
+
     }
 
+    get f(){
+        return this.passwordForm.controls;
+    }
+    checkPassMatch($event){
+        const newPassword = this.passwordForm.controls['newPassword'].value;
+        const rePassword = this.passwordForm.controls['rePassword'].value;
+        if (newPassword !== rePassword) {
+           console.log('not mathc!');
+            return;
+        }
+        console.log('yes match!');
+    }
+
+
     onSubmitNewPW() {
-        if (!this.passwordForm.valid) {
+        if (this.passwordForm.invalid) {
             this.toastr.error('All fields must be filled out');
             return;
         }
         const oldPassword = this.passwordForm.controls['oldPassword'].value;
         const newPassword = this.passwordForm.controls['newPassword'].value;
         const rePassword = this.passwordForm.controls['rePassword'].value;
-        if (newPassword !== rePassword) {
-            this.toastr.error('Password not match');
-            return;
-        }
+        // if (newPassword !== rePassword) {
+        //      this.messege = 'Password not match!';
+        //     return;
+        // }
 
         const passwords: ChangePasswordModel = {
             oldPassword: oldPassword,

@@ -4,6 +4,7 @@ import {SearchNews} from '../../../_models/request/search-news';
 import {NewsCategory} from '../../../_models/news-category';
 import {ApiService} from '../../../_services/api.service';
 import {Router} from '@angular/router';
+import {HomeComponent} from '../home.component';
 
 @Component({
     selector: 'app-news',
@@ -42,11 +43,15 @@ export class NewsComponent implements OnInit {
         this.apiService.post('/news/allByParams', this.searchNews).subscribe(data => {
             if (data.code === '00') {
                 this.newsResponse = data.datas;
+                if (this.newsResponse === null) {
+                    this.newsResponse = data;
+                }
                 this.pageOptions.totalRows = data.totalRows;
                 this.pageOptions.totalPages = data.totalPages;
-                console.log(this.newsResponse);
+
             }
         });
+
     }
 
     // getDetail(id: any) {

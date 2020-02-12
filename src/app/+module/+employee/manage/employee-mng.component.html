@@ -9,10 +9,21 @@
             <div class="col-md-6 col-sm-6">
                 <input placeholder="Nhập họ tên" class="form-control" [(ngModel)]="searchResponseModel.fullName">
             </div>
+            <div class="col-md-6 col-sm-6 float-right">
+                <span style="float: right;padding-top: 5px">Username :</span>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <input placeholder="Nhập Username" class="form-control" [(ngModel)]="searchResponseModel.username">
+            </div>
         </div>
     </div>
-    <div class="form-group text-center">
-        <button (click)="doSearch()" class="btn btn-primary">Search</button>
+    <div style="display: flex">
+        <div style="width: 699px">
+            <button (click)="goToAdd()"  class="btn btn-primary">Add Employee</button>
+        </div>
+        <div class="form-group text-center"  style="width: 820px">
+            <button (click)="doSearch()" class="btn btn-primary">Search</button>
+        </div>
     </div>
     <div class="form-group">
         <h3>Danh sách User</h3>
@@ -26,7 +37,7 @@
                     <th class="text-center">Email</th>
                     <th class="text-center">Phone</th>
                     <th class="text-center">Chức vụ</th>
-                    <th class="text-center">Phòng ban</th>
+<!--                    <th class="text-center">Phòng ban</th>-->
                     <th class="text-center">Trạng thái</th>
                     <th class="text-center">Ngày cập nhật</th>
                     <th class="text-center" style="width: 250px">Actions</th>
@@ -40,27 +51,26 @@
                     <td> {{u.email}} </td>
                     <td> {{u.phoneNumber}} </td>
                     <td> {{u.roleName}} </td>
-                    <td> {{u.departmentName}} </td>
-                    <td> {{u.isActived}} </td>
+<!--                    <td> {{u.departmentName}} </td>-->
+                    <td> {{u.actived ? 'activated' : 'not activated'}} </td>
                     <td> {{u.createdDate | date:'yyyy/MM/dd'}} </td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <button
-                                    class="btn btn-info btn-sm">
-                                <i class="fa fa-eye"></i>
-                                <span class="d-none d-md-inline">View</span>
-                            </button>
+                            <!--                            <button-->
+                            <!--                                    class="btn btn-info btn-sm">-->
+                            <!--                                <i class="fa fa-eye"></i>-->
+                            <!--                                <span class="d-none d-md-inline">View</span>-->
+                            <!--                            </button>-->
                             <button type="submit" (click)="viewOrEditUser(u)"
                                     class="btn btn-primary btn-sm">
                                 <i class="fa fa-pencil"></i>
                                 <span class="d-none d-md-inline">Edit</span>
                             </button>
-                            <form>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Delete</label>
-                                </div>
-                            </form>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="onCheckBox($event)">
+                                <label class="form-check-label" for="exampleCheck1">Delete</label>
+                            </div>
+                            <button (click)="doDelete(u.id)" class="btn btn-danger">Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -68,17 +78,19 @@
             </table>
             <div style="display: flex;">
 
-                    <pagination [boundaryLinks]="true"
-                                [totalItems]="pageOptions.totalRows"
-                                [itemsPerPage]="pageOptions.pageSize"
-                                [maxSize]="pageOptions.pageSize"
-                                (pageChanged)="onPageChanged($event)"
-                                previousText="&lsaquo;"
-                                nextText="&rsaquo;" firstText="&laquo;"
-                                lastText="&raquo;"
-                                style="width: 700px"
-                    ></pagination>
-                    <button class="btn btn-danger" style="margin-left: 734px;border: 0px">Delete</button>
+                <pagination [boundaryLinks]="true"
+                            [totalItems]="pageOptions.totalRows"
+                            [itemsPerPage]="pageOptions.pageSize"
+                            [maxSize]="pageOptions.pageSize"
+                            (pageChanged)="onPageChanged($event)"
+                            previousText="&lsaquo;"
+                            nextText="&rsaquo;" firstText="&laquo;"
+                            lastText="&raquo;"
+                            style="width: 700px"
+                ></pagination>
+                <button class="btn btn-danger" style="margin-left: 734px;border: 0px" [disabled]="listID.length == 0"
+                        (click)="deleteById()">Delete
+                </button>
             </div>
         </div>
         <br>

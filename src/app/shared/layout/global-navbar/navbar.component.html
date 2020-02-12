@@ -6,13 +6,13 @@
     </button>
     <div class="collapse navbar-collapse" >
         <ul class="navbar-nav">
-            <div class="dropdown">
+            <div class="dropdown show">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white" >
                     NewsCategory
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngFor="let ite of category">
-                    <a class="dropdown-item" routerLink="/news/{{ite.id}}">{{ite.name}}</a>
-                </div>
+                <ul class="dropdown-menu">
+                    <li  *ngFor="let cate of category"> <a class="dropdown-item" routerLink="/news/{{cate.id}}">{{cate.name}}</a></li>
+                </ul>
             </div>
         </ul>
     </div>
@@ -37,6 +37,7 @@
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li><a (click)="getProfile()" style="cursor: pointer;">Profile</a></li>
+                    <li><a (click)="addNews()" style="cursor: pointer;">Add news</a></li>
                     <li><a (click)="changePassword()" style="cursor: pointer;">Change password</a></li>
                     <li><a (click)="logout()" style="cursor: pointer;color: red">Logout</a></li>
                 </ul>

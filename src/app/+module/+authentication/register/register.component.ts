@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../_services/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {ApiService} from '../../../_services/api.service';
 import {EmployeeRequestModel} from '../../../_models/request/employee-request.model';
+import {ExistingUsernameValidator} from '../custom-validators/existingUsernameValidator';
 
 @Component({
     selector: 'app-register',
@@ -27,7 +28,9 @@ export class RegisterComponent implements OnInit {
         private auth: AuthService,
         private toastr: ToastrService,
         private router: Router,
-        private apiService: ApiService
+        private apiService: ApiService,
+        private fb: FormBuilder,
+        private val: ExistingUsernameValidator
     ) {
     }
 
@@ -37,35 +40,37 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['']);
         }
 
-        this.registrationForm = new FormGroup({
-            username: new FormControl('', Validators.required),
-            fullName: new FormControl('', Validators.required),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            phoneNumber: new FormControl('', Validators.required),
-            skypeAcc: new FormControl('', Validators.required),
-            fbLink: new FormControl('', Validators.required),
-            userType: new FormControl('', Validators.required),
-            address: new FormControl('', Validators.required),
-            education: new FormControl('', Validators.required),
-            university: new FormControl('', Validators.required),
-            faculty: new FormControl('', Validators.required),
-            graduationYear: new FormControl('', Validators.required)
-        });
+        this.registrationForm = this.fb.group({
+            username: ['',Validators.compose( [Validators.required]),this.val.usernameValidator],
+            fullName: ['', [Validators.required]],
+            email: ['', [Validators.required, Validators.pattern(
+                new RegExp('^[a-z][a-z0-9_\\.]{4,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')
+            )]],
+            phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+            skypeAcc: ['', [Validators.required]],
+            fbLink: ['', [Validators.required]],
+            userType: ['', Validators.required],
+            address: ['', Validators.required],
+            education: ['', Validators.required],
+            university: ['', Validators.required],
+            faculty: ['', Validators.required],
+            graduationYear: ['', [Validators.required, Validators.minLength(4)]]
+        }, {updateOn: 'blur'});
+        const username = this.registrationForm.controls['username'].value;
+    }
+
+    get f() {
+        return this.registrationForm.controls;
+    }
+
+    sendMail() {
+        console.log('email : ');
     }
 
     onRegisterSubmit(): void {
-        if (!this.registrationForm.valid) {
-            this.toastr.error('All fields need to be filled.');
+        if (this.registrationForm.invalid) {
             return;
         }
-
-        // const password = this.registrationForm.controls['password'].value;
-        // const repeatPassword = this.registrationForm.controls['repeatPassword'].value;
-        //
-        // if (password !== repeatPassword) {
-        //     this.toastr.warning('Passwords don\'t match', 'Warning');
-        //     return;
-        // }
 
         const userInfo: EmployeeRequestModel = {
                 username: this.registrationForm.controls['username'].value,
@@ -85,10 +90,22 @@ export class RegisterComponent implements OnInit {
 
         this.apiService.post('/employee/add', userInfo).subscribe(data => {
             this.isUserInfoSent = true;
-            // this.isUserNotSent = true;
         }, error => {
-            // this.isUserNotSent = false;
             this.toastr.error('There was an error while adding your account. Try again later.');
+        });
+
+    }
+
+    checkUsername() {
+        const username = this.registrationForm.controls['username'].value;
+        console.log('username : ' + username);
+
+        return this.apiService.get('/employee/' + username).subscribe(res => {
+            if (res.code === '00') {
+                 this.message = 'Username Already Exist!';
+            } else {
+                this.message = '';
+            }
         });
     }
 

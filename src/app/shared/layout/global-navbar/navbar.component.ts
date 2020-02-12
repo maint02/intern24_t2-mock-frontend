@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
     menuHidden = true;
 
-    category: NewsCategory[] = [];
+    category: NewsCategory;
 
     constructor(
         private router: Router,
@@ -52,12 +52,16 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/changepassword']);
     }
 
+    addNews() {
+        this.router.navigate(['/newsAdd']);
+    }
+
     getAllCategory(): void {
         this.apiService.get('/newCategory/all').subscribe(res => {
             if (res.code === '00') {
                 this.category = res.datas;
             }
-        },error => {
+        }, error => {
             return throwError(error);
         });
     }
@@ -65,16 +69,19 @@ export class NavbarComponent implements OnInit {
     getCategoryById(id: any): void {
         this.apiService.get('/newCategory/all/:id', id).subscribe(
             data => {
-                this.router.navigate(['/news/',id]);
+                this.router.navigate(['/news/', id]);
             }, error => {
                 return throwError(error);
             }
         );
     }
-    goToEmployee(){
+
+    goToEmployee() {
         this.router.navigate(['/employee']);
     }
+
     doSearch() {
-         this.newComponent.newsSearch();
+        this.newComponent.newsSearch();
+        this.router.navigate(['/news']);
     }
 }

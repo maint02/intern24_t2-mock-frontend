@@ -8,11 +8,12 @@ import {RegisterComponent} from './register/register.component';
 import { AccountConfirmationComponent } from './account-confirmation/account-confirmation.component';
 import {AuthService} from '../../_services/auth.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgotPwComponent } from './forgot-pw/forgot-pw.component';
 
 @NgModule({
     imports: [SharedModule, AuthRouting],
     declarations: [AuthComponent,
-        LoginComponent, RegisterComponent, AccountConfirmationComponent, ChangePasswordComponent],
+        LoginComponent, RegisterComponent, AccountConfirmationComponent, ChangePasswordComponent, ForgotPwComponent],
     exports: [],
     providers: [AuthService]
 })

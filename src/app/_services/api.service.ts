@@ -32,6 +32,13 @@ export class ApiService {
             return throwError(err);
         }));
     }
+    postByAd(path: string, body: Object = {}): Observable<any> {
+        return this.http.post(
+            `${environment.auth_url}${path}`, body
+        ).pipe(catchError(err => {
+            return throwError(err);
+        }));
+    }
 
     delete(path): Observable<any> {
         return this.http.delete(

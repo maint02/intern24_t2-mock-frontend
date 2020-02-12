@@ -29,9 +29,7 @@ export class NewsDetailComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         this.apiService.get('/news/all/' + id).subscribe(res => {
             if (res.code === '00') {
-
                 this.news = res.data;
-                console.log(this.news);
             }
         }, error => {
             this.toastr.error('Get News Failed!');

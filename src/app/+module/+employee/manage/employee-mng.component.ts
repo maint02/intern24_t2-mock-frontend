@@ -5,6 +5,7 @@ import {SearchEmployeeModel} from '../../../_models/request/search-employee.mode
 import {SearchEmployeeResponseModel} from '../../../_models/response/search-employee-response.model';
 import {EmployeeService} from '../../../_services/employee.service';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-employee-mng',
@@ -23,12 +24,15 @@ export class EmployeeMngComponent implements OnInit {
         totalRows: 0,
         totalPages: 0
     };
+    listID: number[] = [];
 
     constructor(
         private apiService: ApiService,
         private employeService: EmployeeService,
-        private router: Router
+        private router: Router,
+        private toastr: ToastrService
     ) {
+
     }
 
     ngOnInit(): void {
@@ -46,7 +50,6 @@ export class EmployeeMngComponent implements OnInit {
 
     doSearch() {
         this.employeService.getAllByParams(this.searchResponseModel).subscribe(res => {
-                console.log(res);
                 if (res.code === '00') {
                     this.employee = res.datas;
                     this.pageOptions.totalPages = res.totalPages;
@@ -57,23 +60,57 @@ export class EmployeeMngComponent implements OnInit {
     }
 
     onPageChanged(event) {
-        console.log('eeeee', this.searchResponseModel);
         this.pageOptions.page = event.page - 1;
         this.pageOptions.pageSize = event.itemsPerPage;
         this.doSearch();
     }
 
-    deleteById(id: any) {
-        this.apiService.delete('/employee/delete').subscribe(res => {
-            if (res.code === '00') {
-                this.doSearch();
-            }
-        });
-    }
 
     viewOrEditUser(employee: Employee) {
         window.localStorage.removeItem('viewOrEditUser');
         window.localStorage.setItem('viewOrEditUser', employee.id.toString());
         this.router.navigate(['/employee-detail']);
+    }
+
+    onCheckBox(event) {
+        console.log('event : ' +event);
+        if (event.target.checked) {
+            this.listID.push(event.target.value);
+            console.log('list id:' + this.listID);
+        } else {
+            this.listID.forEach(id => {
+                const vitri = this.listID.indexOf(id); // lấy index của id đó
+                if (id === event.target.value) {
+                    this.listID.splice(vitri, 1); // xóa 1 phần tử trong list từ id đó
+                    console.log('list id:' + this.listID);
+                }
+            });
+        }
+    }
+
+    deleteById() {
+        this.apiService.delete('/employee/delete/' + this.listID).subscribe(res => {
+            if (res.code === '00') {
+                this.listID = [];
+                this.doSearch();
+                this.toastr.success('delete successfully!');
+            }
+        }, error => {
+            this.toastr.error('Delete failed!');
+        });
+    }
+    doDelete(id: any){
+        this.apiService.delete('/employee/delete/'+ id).subscribe(res=>{
+            if(res.code === '00'){
+                this.doSearch();
+                this.toastr.success('delete successfully!');
+            }
+        },error => {
+            this.toastr.error('Delete failed!');
+        })
+    }
+
+    goToAdd(){
+        this.router.navigate(['/add']);
     }
 }

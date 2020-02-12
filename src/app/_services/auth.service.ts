@@ -8,6 +8,8 @@ import {USER_ID_KEY, USER_ROLE_KEY, USER_TOKEN_KEY, USERNAME_KEY} from '../_mode
 import {API_VERIFY_ACCOUNT} from '../_models/config/api-paths';
 import {ChangePasswordModel} from '../_models/request/change-password.model';
 import {JwtResponse} from '../_models/response/jwt-response';
+import {Employee} from '../_models/employee.model';
+import {EmployeeAddModel} from '../_models/request/employee-add.model';
 
 
 @Injectable(
@@ -18,7 +20,7 @@ import {JwtResponse} from '../_models/response/jwt-response';
 export class AuthService {
     constructor(
         private http: HttpClient
-      ) {
+    ) {
 
     }
 
@@ -47,13 +49,31 @@ export class AuthService {
     }
 
     changePassword(passwords: ChangePasswordModel) {
-        return this.http.post(`${environment.auth_url}/change-password`, passwords)
+        return this.http.post(`${environment.auth_url}/change-password/` + localStorage.getItem(USERNAME_KEY), passwords)
             .pipe(
                 retry(2),
                 catchError(err => {
                     return throwError(err);
                 })
             );
+    }
+
+    updateByAdmin(employee: Employee) {
+        return this.http.put(`${environment.auth_url}/update`, employee)
+            .pipe(
+                retry(2),
+                catchError(err => {
+                    return throwError(err);
+                })
+            );
+    }
+
+    addByAdmin(empAdd: EmployeeAddModel)  {
+        return this.http.post(`${environment.auth_url}/add`, empAdd)
+            .pipe(retry(2)),
+            catchError(err => {
+                return throwError(err);
+            });
     }
 
 }

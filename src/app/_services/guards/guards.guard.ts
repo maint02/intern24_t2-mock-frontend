@@ -20,7 +20,7 @@ export class GuardsGuard implements CanActivate {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         const role = localStorage.getItem(USER_ROLE_KEY);
-        if ((role === ROLE_HR) || (role === ROLE_MANAGER) && (this.auth.isLoggedIn())) {
+        if (((role === ROLE_HR) || (role === ROLE_MANAGER)) && (this.auth.isLoggedIn())) {
             return true;
         }
         return false;

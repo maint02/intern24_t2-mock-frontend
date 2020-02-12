@@ -1,0 +1,37 @@
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <ng-template [ngIf]="isEmailSent" [ngIfElse]="isUserNotSent">
+                <h2>Account activation</h2>
+                <p>Check out your email for activation link. After activation you can use this account.</p>
+            </ng-template>
+            <ng-template #isUserNotSent>
+            <div class="card-body">
+                <h2>Forgot password!</h2>
+                <br>
+                <form [formGroup]="change" (ngSubmit)="onSubmit()">
+                    <div class="col-7">
+                        <div class="input-group">
+                            Email:<input class="input--style-4" type="text" name="email" formControlName="email"  >
+                        </div>
+                        <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                            <div *ngIf="f.email.errors.required"  class="help text-danger">Email is required!</div>
+                            <div *ngIf="f.email.errors.pattern"  class="help text-danger">Invalid email!</div>
+                        </div>
+                    </div>
+                    <div class="p-t-15">
+                        <button class="btn btn--radius-2 btn--blue" type="submit"  >Send </button>
+                    </div>
+                </form>
+                <br>
+                <div align="center">
+                    <span>
+                        <a (click)="onClickGoHome()" style="cursor: pointer; color: blueviolet;">Back to HomePage</a>
+                    </span>
+                </div>
+            </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+

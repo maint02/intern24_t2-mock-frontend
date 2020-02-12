@@ -27,12 +27,13 @@ export class HomeComponent implements OnInit {
         private apiService: ApiService,
         private router: Router
     ) {
+        this.searchNews.page = 0;
+        this.searchNews.pageSize = 5;
     }
 
     ngOnInit() {
-        this.searchNews.page = 0;
-        this.searchNews.pageSize = 5;
-       console.log('Home init');
+        console.log('Home init');
+        this.newsSearch();
     }
 
     newsSearch(): void {

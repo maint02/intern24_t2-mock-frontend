@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from '../../../_services/api.service';
 import {Employee} from '../../../_models/employee.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {first} from 'rxjs/operators';
 import {throwError} from 'rxjs';
+import {AuthService} from '../../../_services/auth.service';
+import {Authorities} from '../../../_models/authorities';
 
 @Component({
     selector: 'app-employee-detail',
@@ -17,12 +19,15 @@ export class EmployeeDetailComponent implements OnInit {
 
     editForm: FormGroup;
 
+    name: any;
+
     constructor(
         private router: Router,
         private apiService: ApiService,
         private activatedRouter: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private authService: AuthService
     ) {
 
     }
@@ -36,43 +41,62 @@ export class EmployeeDetailComponent implements OnInit {
         }
 
         this.editForm = this.formBuilder.group({
-            id: [''],
-            username: ['', Validators.required],
-            password: ['', Validators.required],
-            birthday: ['',Validators.required],
-            email: ['', Validators.required],
-            address: ['', Validators.required],
-            education: ['', Validators.required],
-            faculty: ['', Validators.required],
-            fbLink: ['', Validators.required],
-            fullName: ['', Validators.required],
-            graduationYear: ['', Validators.required],
-            image: ['', Validators.required],
-            phoneNumber: ['', Validators.required],
-            skypeAcc: ['', Validators.required],
-            university: ['', Validators.required],
-            createdDate: ['', Validators.required],
-            userType: ['', Validators.required]
-        });
+                id: ['', [Validators.required]],
+                username: [''],
+                password: [''],
+                email: ['', [Validators.required]],
+                birthday: ['', [Validators.required]],
+                address: ['', [Validators.required]],
+                createdDate: [''],
+                education: ['', [Validators.required]],
+                faculty: ['', [Validators.required]],
+                fbLink: ['', [Validators.required]],
+                fullName: ['', [Validators.required]],
+                graduationYear: ['', [Validators.required]],
+                lastAccess: [''],
+                phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+                skypeAcc: ['', [Validators.required]],
+                university: ['', [Validators.required]],
+                userType: ['', [Validators.required]],
+                role: ['',[Validators.required]],
+                actived:['',[Validators.required]]
+            },
+            {
+                updateOn: 'blur',
+            });
+        this.editForm.reset({value: 'username', disabled: 'true'});
+        this.editForm.reset({value: 'id', disabled: 'true'});
+        this.editForm.reset({value: 'createdDate', disabled: 'true'});
+        this.editForm.reset({value: 'password', disabled: 'true'});
 
-        this.apiService.get('/employee/' + empId).subscribe(res => {
+        this.apiService.get('/employee/id/' + empId).subscribe(res => {
             if (res.code === '00') {
+                console.log(res.data);
                 this.editForm.setValue(res.data);
                 this.employee = res.data;
-                console.log(res.data);
+                this.name = res.data.authorities.name;
+                console.log(name);
             }
         });
     }
 
+    get authorities(): FormArray {
+        return this.editForm.get('authorities') as FormArray;
+    }
+
+
+    get f() {
+        return this.editForm.controls;
+    }
+
     onSubmit() {
-        this.apiService.put('/employee/update', this.editForm.value)
+        this.authService.updateByAdmin(this.editForm.value)
             .pipe(first())
             .subscribe(res => {
-                if (res.status === 200) {
+                if (res) {
                     this.toastr.success('Employee Update Successfully!');
                     this.router.navigate(['/employee']);
                 } else {
-                    console.log(res.message);
                     this.toastr.error('All fields need to be filled!');
                 }
             }, error => {

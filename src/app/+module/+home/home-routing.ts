@@ -1,9 +1,11 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home.component';
-import {MonitorComponent} from './monitor/monitor.component';
 import {NewsComponent} from './news/news.component';
 import {NewsDetailComponent} from './news-detail/news-detail.component';
+import {NewsAddComponent} from './news-add/news-add.component';
+import {ProfileEmpComponent} from './profile-emp/profile-emp.component';
+import {AuthGuard} from '../../_services/guards/auth.guard';
 
 const homeRoutes: Routes = [
     {
@@ -23,6 +25,14 @@ const homeRoutes: Routes = [
             {
                 path: 'news',
                 component: NewsComponent
+            },
+            {
+                path: 'newsAdd',
+                component: NewsAddComponent
+            },
+            {
+                path: 'profile',
+                component: ProfileEmpComponent
             }
         ]
     }

@@ -4,8 +4,8 @@ import {EmployeeComponent} from './employee.component';
 import {EmployeeMngComponent} from './manage/employee-mng.component';
 import {GuardsGuard} from '../../_services/guards/guards.guard';
 import {AuthGuard} from '../../_services/guards/auth.guard';
-import {ProfileComponent} from './profile/profile.component';
 import {EmployeeDetailComponent} from './employee-detail/employee-detail.component';
+import {EmployeeCreateComponent} from './employee-create/employee-create.component';
 
 const employeeRoutes: Routes = [
     {
@@ -29,10 +29,10 @@ const employeeRoutes: Routes = [
                 component: EmployeeDetailComponent
             },
             {
-                path: 'profile',
-                canActivate:[AuthGuard],
-                component: ProfileComponent
-            }
+                path: 'add',
+                canActivate:[GuardsGuard],
+                component: EmployeeCreateComponent
+            },
         ]
     }
 ];
