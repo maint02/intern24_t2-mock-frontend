@@ -5,6 +5,7 @@ export class ProfileEmp {
     email: string;
     createdDate: any;
     fullName: string;
+    image: string;
     lastAccess: any;
     phoneNumber: number;
     fbLink: string;

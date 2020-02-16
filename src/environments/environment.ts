@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:8888/api',
-  auth_url: 'http://localhost:8888/auth'
+  auth_url: 'http://localhost:8888/api/auth'
 };
 /*
  * For easier debugging in development mode, you can import the following file

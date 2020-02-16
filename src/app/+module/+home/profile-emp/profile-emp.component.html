@@ -2,19 +2,22 @@
     <div class="row">
         <div class="col-sm-10"><h1></h1></div>
     </div>
-    <div class="row">
+    <form class="form" action="##" method="post" id="registrationForm" [formGroup]="profileForm"
+          (ngSubmit)="onEdit()" class="row" enctype="multipart/form-data">
         <div class="col-sm-3"><!--left col-->
-
-
+            <div *ngIf="profileEmp && profileEmp.image && !preview" >
+<!--                <p>{{profileEmp.image}}</p>-->
+                <img src="http://localhost:8888/api/images/{{ profileEmp.image}}" class="avatar img-circle img-thumbnail" alt="{{profileEmp.image}}">
+            </div>
+            <div class="preview text-center" *ngIf="preview && preview !== null">
+                <img [src]="preview" class="avatar img-circle img-thumbnail">
+            </div>
             <div class="text-center">
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail"
-                     alt="avatar">
-                <h6>Upload a different photo...</h6>
-                <input type="file" class="text-center center-block file-upload" style="width: 265px;">
+                <input type="file" class="text-center center-block file-upload" style="width: 265px;"
+                       (change)="uploadFile($event)" >
             </div>
             <hr>
             <br>
-
             <ul class="list-group">
                 <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Tổng số bài viết</strong></span>
@@ -27,31 +30,33 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <hr>
-                    <form class="form" action="##" method="post" id="registrationForm" [formGroup]="profileForm"
-                          (ngSubmit)="onEdit()" class="row">
+                    <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group">
-
-                                <div class="col-xs-6" [hidden]="true" >
+                            <div class="form-group" [hidden]="true">
+                                <div class="col-xs-6">
                                     <label><h4>id:</h4></label>
-                                    <input type="text" class="form-control" name="id" id="id"
-                                           placeholder="id" title="enter your first name if any." [readOnly]="true"
+                                    <input type="text" class="form-control" name="first_name" id="username"
+                                           placeholder="Username" title="enter your first name if any."
+                                           [readOnly]="true"
                                            formControlName="id">
+                                    <div *ngIf="f.id.invalid && (f.id.dirty || f.id.touched)">
+                                        <div class="help text-danger" *ngIf="f.id.errors.required">id is
+                                            required!
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6" [hidden]="true" >
-                                    <label><h4>id:</h4></label>
-                                    <input type="text" class="form-control" name="password" id="password"
-                                           placeholder="id" title="enter your first name if any." [readOnly]="true"
-                                           formControlName="password">
-                                </div>
-
+                            </div>
+                            <div class="form-group">
                                 <div class="col-xs-6">
                                     <label><h4>Username:</h4></label>
                                     <input type="text" class="form-control" name="first_name" id="username"
-                                           placeholder="Username" title="enter your first name if any." [readOnly]="true"
+                                           placeholder="Username" title="enter your first name if any."
+                                           [readOnly]="true"
                                            formControlName="username">
                                     <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)">
-                                        <div class="help text-danger" *ngIf="f.username.errors.required">Username is required!</div>
+                                        <div class="help text-danger" *ngIf="f.username.errors.required">Username is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +67,9 @@
                                            placeholder="fullName" title="enter your name if any."
                                            formControlName="fullName">
                                     <div *ngIf="f.fullName.invalid && (f.fullName.dirty || f.fullName.touched)">
-                                        <div class="help text-danger" *ngIf="f.fullName.errors.required">fullName is required!</div>
+                                        <div class="help text-danger" *ngIf="f.fullName.errors.required">fullName is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +80,9 @@
                                            placeholder="enter birthday" title="enter your birthday if any."
                                            formControlName="birthday">
                                     <div *ngIf="f.birthday.invalid && (f.birthday.dirty || f.birthday.touched)">
-                                        <div class="help text-danger" *ngIf="f.birthday.errors.required">birthday is required!</div>
+                                        <div class="help text-danger" *ngIf="f.birthday.errors.required">birthday is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +93,9 @@
                                            placeholder="enter address" title="enter your address if any."
                                            formControlName="address">
                                     <div *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)">
-                                        <div class="help text-danger" *ngIf="f.address.errors.required">address is required!</div>
+                                        <div class="help text-danger" *ngIf="f.address.errors.required">address is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +106,13 @@
                                            placeholder="enter Phone  number" title="enter your mobile number if any."
                                            formControlName="phoneNumber">
                                     <div *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
-                                        <div class="help text-danger" *ngIf="f.phoneNumber.errors.required">phoneNumber is required!</div>
-                                        <div class="help text-danger" *ngIf="f.phoneNumber.errors.minlength">phoneNumber must be at 10 character!</div>
+                                        <div class="help text-danger" *ngIf="f.phoneNumber.errors.required">phoneNumber
+                                            is
+                                            required!
+                                        </div>
+                                        <div class="help text-danger" *ngIf="f.phoneNumber.errors.minlength">phoneNumber
+                                            must be at 10 character!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +123,9 @@
                                            placeholder="enter Skype Links" title="enter your Skype Links if any."
                                            formControlName="skypeAcc">
                                     <div *ngIf="f.skypeAcc.invalid && (f.skypeAcc.dirty || f.skypeAcc.touched)">
-                                        <div class="help text-danger" *ngIf="f.skypeAcc.errors.required">skypeAcc is required!</div>
+                                        <div class="help text-danger" *ngIf="f.skypeAcc.errors.required">skypeAcc is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -118,16 +136,18 @@
                                            placeholder="enter Facebook Links" title="enter your Facebook Links if any."
                                            formControlName="fbLink">
                                     <div *ngIf="f.fbLink.invalid && (f.fbLink.dirty || f.fbLink.touched)">
-                                        <div class="help text-danger" *ngIf="f.fbLink.errors.required">fbLink is required!</div>
+                                        <div class="help text-danger" *ngIf="f.fbLink.errors.required">fbLink is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-<!--                            <div class="form-group">-->
-<!--                                <div class="col-xs-6">-->
-<!--                                    <label for="fbLink"><h4>Trạng thái:</h4></label>-->
-<!--                                    <span>{{status}}</span>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                            <div class="form-group">-->
+                            <!--                                <div class="col-xs-6">-->
+                            <!--                                    <label for="fbLink"><h4>Trạng thái:</h4></label>-->
+                            <!--                                    <span>{{status}}</span>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
 
                         <div class="col-sm-6">
@@ -139,8 +159,10 @@
                                            placeholder="you@email.com" title="enter your email."
                                            formControlName="email">
                                     <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
-                                        <div class="help text-danger" *ngIf="f.email.errors.required">email is required!</div>
-                                        <div class="help text-danger" *ngIf="f.email.errors.pattern">Invalid email!</div>
+                                        <div class="help text-danger" *ngIf="f.email.errors.required">email is required!
+                                        </div>
+                                        <div class="help text-danger" *ngIf="f.email.errors.pattern">Invalid email!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +174,9 @@
                                            name="university" formControlName="university"
                                            title="enter a university">
                                     <div *ngIf="f.university.invalid && (f.university.dirty || f.university.touched)">
-                                        <div class="help text-danger" *ngIf="f.university.errors.required">university is required!</div>
+                                        <div class="help text-danger" *ngIf="f.university.errors.required">university is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +188,9 @@
                                            placeholder="faculty" title="enter your university."
                                            formControlName="faculty">
                                     <div *ngIf="f.faculty.invalid && (f.faculty.dirty || f.faculty.touched)">
-                                        <div class="help text-danger" *ngIf="f.faculty.errors.required">faculty is required!</div>
+                                        <div class="help text-danger" *ngIf="f.faculty.errors.required">faculty is
+                                            required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +206,10 @@
                                         </select>
                                         <div class="select-dropdown"></div>
                                         <div *ngIf="f.education.invalid && (f.education.dirty || f.education.touched)">
-                                            <div class="help text-danger" *ngIf="f.education.errors.required">education is required!</div>
+                                            <div class="help text-danger" *ngIf="f.education.errors.required">education
+                                                is
+                                                required!
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,9 +221,11 @@
                                     <input type="number" class="form-control" name="graduationYear" id="graduationYear"
                                            [maxLength]="4"
                                            placeholder="graduationYear" title="enter your graduationYear."
-                                           formControlName="graduationYear" >
+                                           formControlName="graduationYear">
                                     <div *ngIf="f.graduationYear.invalid && (f.graduationYear.dirty || f.graduationYear.touched)">
-                                        <div class="help text-danger" *ngIf="f.graduationYear.errors.required">graduationYear is required!</div>
+                                        <div class="help text-danger" *ngIf="f.graduationYear.errors.required">
+                                            graduationYear is required!
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +242,9 @@
                                         </select>
                                         <div class="select-dropdown"></div>
                                         <div *ngIf="f.userType.invalid && (f.userType.dirty || f.userType.touched)">
-                                            <div class="help text-danger" *ngIf="f.userType.errors.required">userType is required!</div>
+                                            <div class="help text-danger" *ngIf="f.userType.errors.required">userType is
+                                                required!
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +255,7 @@
                                     <label for="createdDate"><h4>Ngày tạo:</h4></label>
                                     <input type="date" class="form-control" name="createdDate" id="createdDate"
                                            placeholder="userType" title="enter your userType."
-                                           formControlName="createdDate" [disabled]="true" [readOnly]="true" >
+                                           formControlName="createdDate" [disabled]="true" [readOnly]="true">
                                 </div>
                             </div>
                         </div>
@@ -234,8 +267,8 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
 
+                    </div>
                     <hr>
 
                 </div><!--/tab-pane-->
@@ -243,5 +276,5 @@
             </div><!--/tab-content-->
 
         </div><!--/col-9-->
-    </div><!--/row-->
+    </form>
 </div>
