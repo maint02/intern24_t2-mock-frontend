@@ -5,7 +5,6 @@ import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {ApiService} from '../../../_services/api.service';
 import {EmployeeRequestModel} from '../../../_models/request/employee-request.model';
-import {ExistingUsernameValidator} from '../custom-validators/existingUsernameValidator';
 
 @Component({
     selector: 'app-register',
@@ -29,8 +28,7 @@ export class RegisterComponent implements OnInit {
         private toastr: ToastrService,
         private router: Router,
         private apiService: ApiService,
-        private fb: FormBuilder,
-        private val: ExistingUsernameValidator
+        private fb: FormBuilder
     ) {
     }
 
@@ -41,7 +39,7 @@ export class RegisterComponent implements OnInit {
         }
 
         this.registrationForm = this.fb.group({
-            username: ['',Validators.compose( [Validators.required]),this.val.usernameValidator],
+            username: ['',Validators.compose( [Validators.required])],
             fullName: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.pattern(
                 new RegExp('^[a-z][a-z0-9_\\.]{4,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')

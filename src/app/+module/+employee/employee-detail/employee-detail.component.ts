@@ -72,7 +72,27 @@ export class EmployeeDetailComponent implements OnInit {
         this.apiService.get('/employee/id/' + empId).subscribe(res => {
             if (res.code === '00') {
                 console.log(res.data);
-                this.editForm.setValue(res.data);
+                this.editForm.setValue({
+                    id: res.data.id,
+                    username: res.data.username,
+                    password: res.data.password,
+                    email: res.data.email,
+                    birthday: res.data.birthday,
+                    address: res.data.address,
+                    createdDate: res.data.createdDate,
+                    education: res.data.education,
+                    faculty: res.data.faculty,
+                    fbLink: res.data.fbLink,
+                    fullName: res.data.fullName,
+                    graduationYear: res.data.graduationYear,
+                    lastAccess: res.data.lastAccess,
+                    phoneNumber: res.data.phoneNumber,
+                    skypeAcc: res.data.skypeAcc,
+                    university: res.data.university,
+                    userType: res.data.userType,
+                    role: res.data.role,
+                    actived:res.data.actived
+                });
                 this.employee = res.data;
                 this.name = res.data.authorities.name;
                 console.log(name);

@@ -6,6 +6,7 @@ import { NewsComponent } from './news/news.component';
 import { NewsDetailComponent } from './news-detail/news-detail.component';
 import { NewsAddComponent } from './news-add/news-add.component';
 import { ProfileEmpComponent } from './profile-emp/profile-emp.component';
+import { NewsManagerComponent } from './news-manager/news-manager.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ProfileEmpComponent } from './profile-emp/profile-emp.component';
     NewsComponent,
     NewsDetailComponent,
     NewsAddComponent,
-    ProfileEmpComponent
+    ProfileEmpComponent,
+    NewsManagerComponent
   ],
   exports: []
 })

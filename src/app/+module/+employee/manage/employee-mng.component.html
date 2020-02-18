@@ -15,6 +15,26 @@
             <div class="col-md-6 col-sm-6">
                 <input placeholder="Nhập Username" class="form-control" [(ngModel)]="searchResponseModel.username">
             </div>
+            <div class="col-md-2 col-sm2" style="margin-left: 610px">
+                <br>
+                <span>Ngày cập nhật:</span>
+            </div>
+            <div class = "col-md-2 col-sm-2" >
+                <label>
+                    Start Date
+                    <input type="date"
+                           class = "form-control"
+                           [(ngModel)] ="searchResponseModel.startDate">
+                </label>
+            </div>
+            <div class = "col-md-2 col-sm-2" style="margin-left: 9px">
+                <label>
+                    End Date
+                    <input type="date"
+                           class = "form-control"
+                           [(ngModel)] = "searchResponseModel.endDate">
+                </label>
+            </div>
         </div>
     </div>
     <div style="display: flex">
@@ -67,10 +87,9 @@
                                 <span class="d-none d-md-inline">Edit</span>
                             </button>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="onCheckBox($event)">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1"  (change)="onCheckBox($event)" [value]="u.id">
                                 <label class="form-check-label" for="exampleCheck1">Delete</label>
                             </div>
-                            <button (click)="doDelete(u.id)" class="btn btn-danger">Delete</button>
                         </div>
                     </td>
                 </tr>

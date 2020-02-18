@@ -9,19 +9,22 @@
 <!--                <p>{{profileEmp.image}}</p>-->
                 <img src="http://localhost:8888/api/images/{{ profileEmp.image}}" class="avatar img-circle img-thumbnail" alt="{{profileEmp.image}}">
             </div>
-            <div class="preview text-center" *ngIf="preview && preview !== null">
-                <img [src]="preview" class="avatar img-circle img-thumbnail">
+<!--           <!-- Image Preview -->
+            <div class="form-group">
+                <div class="preview" *ngIf="preview && preview !== null">
+                    <img [src]="preview" [alt]="profileForm.value.name">
+                </div>
             </div>
-            <div class="text-center">
-                <input type="file" class="text-center center-block file-upload" style="width: 265px;"
-                       (change)="uploadFile($event)" >
+            <!-- File Input -->
+            <div class="form-group">
+                <input type="file" (change)="uploadFile($event)"  id="image" >
             </div>
             <hr>
             <br>
             <ul class="list-group">
                 <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong>Tổng số bài viết</strong></span>
-                    12
+                   0
                 </li>
             </ul>
         </div><!--/col-3-->
@@ -35,7 +38,7 @@
                             <div class="form-group" [hidden]="true">
                                 <div class="col-xs-6">
                                     <label><h4>id:</h4></label>
-                                    <input type="text" class="form-control" name="first_name" id="username"
+                                    <input type="text" class="form-control" name="first_name" id="id"
                                            placeholder="Username" title="enter your first name if any."
                                            [readOnly]="true"
                                            formControlName="id">

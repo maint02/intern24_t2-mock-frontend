@@ -13,5 +13,7 @@ export class SearchEmployeeResponseModel extends BaseModel {
     role_name: string;
     department_name: string;
     leader_id: number;
+    startDate: Date;
+    endDate: Date;
 }
 

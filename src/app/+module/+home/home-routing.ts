@@ -6,6 +6,7 @@ import {NewsDetailComponent} from './news-detail/news-detail.component';
 import {NewsAddComponent} from './news-add/news-add.component';
 import {ProfileEmpComponent} from './profile-emp/profile-emp.component';
 import {AuthGuard} from '../../_services/guards/auth.guard';
+import {NewsManagerComponent} from './news-manager/news-manager.component';
 
 const homeRoutes: Routes = [
     {
@@ -33,6 +34,10 @@ const homeRoutes: Routes = [
             {
                 path: 'profile',
                 component: ProfileEmpComponent
+            },
+            {
+                path: 'newMng',
+                component: NewsManagerComponent
             }
         ]
     }

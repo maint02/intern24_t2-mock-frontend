@@ -26,6 +26,8 @@ export class EmployeeMngComponent implements OnInit {
     };
     listID: number[] = [];
 
+    i: number = 0;
+
     constructor(
         private apiService: ApiService,
         private employeService: EmployeeService,
@@ -73,7 +75,7 @@ export class EmployeeMngComponent implements OnInit {
     }
 
     onCheckBox(event) {
-        console.log('event : ' +event);
+        console.log('event : ' + event);
         if (event.target.checked) {
             this.listID.push(event.target.value);
             console.log('list id:' + this.listID);
@@ -89,28 +91,33 @@ export class EmployeeMngComponent implements OnInit {
     }
 
     deleteById() {
-        this.apiService.delete('/employee/delete/' + this.listID).subscribe(res => {
-            if (res.code === '00') {
-                this.listID = [];
+        let id = 0;
+        for (let i = 0; i < this.listID.length; i++) {
+            id = this.listID[i];
+            this.apiService.delete('/employee/delete/' + id).subscribe(res => {
+                // if (res.status === '200') {
+                    console.log('delete id : ' + id);
+                    this.doSearch();
+                    this.toastr.success('delete successfully!');
+                // }
+            }, error => {
+                this.toastr.error('Delete failed!');
+            });
+        }
+        this.doSearch();
+
+    }
+
+    doDelete(id: any) {
+        this.apiService.delete('/employee/delete/' + id).subscribe(res => {
                 this.doSearch();
                 this.toastr.success('delete successfully!');
-            }
         }, error => {
             this.toastr.error('Delete failed!');
         });
     }
-    doDelete(id: any){
-        this.apiService.delete('/employee/delete/'+ id).subscribe(res=>{
-            if(res.code === '00'){
-                this.doSearch();
-                this.toastr.success('delete successfully!');
-            }
-        },error => {
-            this.toastr.error('Delete failed!');
-        })
-    }
 
-    goToAdd(){
+    goToAdd() {
         this.router.navigate(['/add']);
     }
 }

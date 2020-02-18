@@ -1,0 +1,64 @@
+<h1 style="padding-top: 73px">Go to HomePage <a routerLink="" style="color: red">Home</a></h1>
+
+<div class="form-group">
+    <h3>Danh sách User</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr class="text-center">
+                <th class="text-center">STT</th>
+                <th class="text-center">Tiêu đề</th>
+                <th class="text-center">Tóm tắt</th>
+                <th class="text-center">Nội dung</th>
+                <th class="text-center">Người đăng</th>
+                <!--                    <th class="text-center">Phòng ban</th>-->
+                <th class="text-center">Trạng thái</th>
+                <th class="text-center">Ngày đăng bài</th>
+                <th class="text-center" style="width: 250px">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let n of newsResponse; let i = index">
+                <td class="text-center"> {{i + 1 + (pageOptions.page * pageOptions.pageSize)}} </td>
+                <td> {{n.title}} </td>
+                <td>{{n.summary}}</td>
+                <td> {{n.content}} </td>
+                <td> {{n.username}} </td>
+                <td> {{n.posted ? 'activated' : 'not activated'}} </td>
+                <td> {{n.timePost | date:'yyyy/MM/dd'}} </td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <!--                            <button-->
+                        <!--                                    class="btn btn-info btn-sm">-->
+                        <!--                                <i class="fa fa-eye"></i>-->
+                        <!--                                <span class="d-none d-md-inline">View</span>-->
+                        <!--                            </button>-->
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                   (change)="onCheckBox($event)" [value]="n.id">
+                            <label class="form-check-label" for="exampleCheck1">Delete</label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="display: flex;">
+
+            <pagination [boundaryLinks]="true"
+                        [totalItems]="pageOptions.totalRows"
+                        [itemsPerPage]="pageOptions.pageSize"
+                        [maxSize]="pageOptions.pageSize"
+                        (pageChanged)="onPageChanged($event)"
+                        previousText="&lsaquo;"
+                        nextText="&rsaquo;" firstText="&laquo;"
+                        lastText="&raquo;"
+                        style="width: 700px"
+            ></pagination>
+            <button class="btn btn-danger" style="margin-left: 734px;border: 0px" [disabled]="listID.length == 0"
+                    (click)="deleteById()">Delete
+            </button>
+        </div>
+    </div>
+    <br>
+</div>

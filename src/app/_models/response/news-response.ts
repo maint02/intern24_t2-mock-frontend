@@ -3,7 +3,8 @@ export class NewsResponse {
     thumbnail: string;
     title: string;
     username:string;
-    timePost:any;
+    timePost:Date;
     summary: string;
     content: string;
+    posted: boolean;
 }

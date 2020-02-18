@@ -1,3 +1,62 @@
-<div style="padding-top: 73px">
-    <p>add news works!</p>
+<div class="container" style="padding-top: 73px">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <form (ngSubmit)="onAdd()" [formGroup]="newsAdd">
+
+                <h1>Thêm bài viết</h1>
+                <div class="form-group">
+                    <label for="title">Tiêu đề : </label>
+                    <input type="text" class="form-control" formControlName="title" id="title">
+                    <div *ngIf="f.title.invalid && (f.title.dirty || f.title.touched)">
+                        <div *ngIf="f.title.errors.required" class="help text-danger">Title is required!</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="summary">Tóm tắt : </label>
+                    <input type="text" class="form-control" formControlName="summary" id="summary">
+                    <div *ngIf="f.summary.invalid && (f.summary.dirty || f.summary.touched)">
+                        <div *ngIf="f.summary.errors.required" class="help text-danger">Summary is required!</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>Hình ảnh : </label>
+                    <input type="text" class="form-control" formControlName="thumbnail">
+                    <div *ngIf="f.thumbnail.invalid && (f.thumbnail.dirty || f.thumbnail.touched)">
+                        <div *ngIf="f.thumbnail.errors.required" class="help text-danger">Thumbnail is required!</div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="content">Nội dung :</label>
+                    <textarea class="form-control" rows="5" id="content" formControlName="content"></textarea>
+                    <div *ngIf="f.content.invalid && (f.content.dirty || f.content.touched)">
+                        <div *ngIf="f.content.errors.required" class="help text-danger">Content is required!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newCategory"><h4>Loại tin:</h4></label>
+                    <div class="rs-select2 js-select-simple select--no-search">
+                        <select name="newCategory" formControlName="newCategory" id="newCategory">
+                            <option>Công nghệ</option>
+                            <option>Đời sống</option>
+                            <option>Thế giới</option>
+                            <option>Kinh doanh</option>
+                            <option>Thể thao</option>
+                            <option>Giải trí</option>
+                            <option>Thời trang</option>
+                        </select>
+                        <div class="select-dropdown"></div>
+                        <div *ngIf="f.newCategory.invalid && (f.newCategory.dirty || f.newCategory.touched)">
+                            <div class="help text-danger" *ngIf="f.newCategory.errors.required">newCategory is
+                                required!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Đăng bài</button>
+            </form>
+        </div>
+    </div>
 </div>

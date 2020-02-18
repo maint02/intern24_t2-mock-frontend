@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {ApiService} from '../../../_services/api.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ProfileEmp} from '../../../_models/profile-emp';
 import {USER_ID_KEY} from '../../../_models/config/local-storage-keys';
@@ -36,8 +36,31 @@ export class ProfileEmpComponent implements OnInit {
         private apiService: ApiService,
         private fb: FormBuilder,
         private router: Router,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private cd: ChangeDetectorRef
     ) {
+        this.profileForm = this.fb.group({
+            id: [''],
+            username: [''],
+            email: ['', [Validators.required, Validators.pattern(
+                new RegExp('^[a-z][a-z0-9_\\.]{4,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$')
+            )]],
+            birthday: ['', [Validators.required]],
+            address: ['', [Validators.required]],
+            createdDate: ['', [Validators.required]],
+            education: ['', [Validators.required]],
+            faculty: ['', [Validators.required]],
+            fbLink: ['', [Validators.required]],
+            fullName: ['', [Validators.required]],
+            image: [''],
+            graduationYear: ['', [Validators.required, Validators.minLength(4)]],
+            lastAccess: ['', [Validators.required]],
+            phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+            skypeAcc: ['', [Validators.required]],
+            university: ['', [Validators.required]],
+            userType: ['', [Validators.required]]
+
+        }, {updateOn: 'blur'});
     }
 
     ngOnInit() {
@@ -59,7 +82,7 @@ export class ProfileEmpComponent implements OnInit {
             faculty: ['', [Validators.required]],
             fbLink: ['', [Validators.required]],
             fullName: ['', [Validators.required]],
-            image: ['', [Validators.required]],
+            image: [''],
             graduationYear: ['', [Validators.required, Validators.minLength(4)]],
             lastAccess: ['', [Validators.required]],
             phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
@@ -97,12 +120,10 @@ export class ProfileEmpComponent implements OnInit {
                         userType: res.data.userType,
                     });
                     this.uploadedFilePath = res.data.image;
+                    this.status = res.data.actived;
+                    this.profileEmp = res.data;
+                    console.log('profile: ' + this.profileEmp);
                 }
-                this.status = res.data.actived;
-                this.profileEmp = res.data;
-                console.log('profile: ' + this.profileEmp);
-
-                // }
             }
         );
     }
@@ -112,16 +133,18 @@ export class ProfileEmpComponent implements OnInit {
         this.profileForm.patchValue({
             image: file
         });
-        this.profileForm.get('image').updateValueAndValidity();
-
-        // File Preview
+        if (this.profileForm.controls['image'].updateValueAndValidity() === null) {
+            return;
+        }
+        if (this.profileForm.get('image').updateValueAndValidity() === null) {
+            return;
+        }
+        //File Preview
         const reader = new FileReader();
         reader.onload = () => {
             this.preview = reader.result as string;
         };
         reader.readAsDataURL(file);
-        this.profileEmp.image = this.profileForm.controls[('image')].value;
-
     }
 
     // fileProgress(fileInput: any) {
