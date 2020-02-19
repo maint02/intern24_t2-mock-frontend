@@ -14,8 +14,6 @@ import {throwError} from 'rxjs';
 })
 
 export class LoginComponent implements OnInit {
-    username: string = '';
-    password: string = '';
     submited: boolean = false;
     loginForm: FormGroup;
 
@@ -33,6 +31,7 @@ export class LoginComponent implements OnInit {
             password: ['', [Validators.required, Validators.minLength(8)]]
         }, {updateOn: 'blur'});
 
+        // kiểm tra xem đã login hay chưa
         if (this.auth.isLoggedIn()) {
             this.router.navigate(['']);
         }
@@ -52,6 +51,7 @@ export class LoginComponent implements OnInit {
             return;
         }
         this.auth.login(loginInfo).subscribe(data => {
+            // gắn dữ liệu và lưu vào localStorage
             localStorage.setItem(USER_ID_KEY, data.id);
             localStorage.setItem(USER_ROLE_KEY, data.authorities[0]);
             localStorage.setItem(USERNAME_KEY, data.username);

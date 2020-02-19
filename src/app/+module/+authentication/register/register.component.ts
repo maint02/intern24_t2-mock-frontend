@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
             this.toastr.warning('Please logout if you want to create a new account.', 'Warning');
             this.router.navigate(['']);
         }
-
+        // tạo form validate
         this.registrationForm = this.fb.group({
             username: ['',Validators.compose( [Validators.required])],
             fullName: ['', [Validators.required]],
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
         }, {updateOn: 'blur'});
         const username = this.registrationForm.controls['username'].value;
     }
-
+    // lấy dữ liệu được nhập vào từ form
     get f() {
         return this.registrationForm.controls;
     }
@@ -64,12 +64,13 @@ export class RegisterComponent implements OnInit {
     sendMail() {
         console.log('email : ');
     }
-
+    // add user
     onRegisterSubmit(): void {
         if (this.registrationForm.invalid) {
             return;
         }
 
+        // gắn giá trị EmployeeRequestModel vào giá trị nhập từ form
         const userInfo: EmployeeRequestModel = {
                 username: this.registrationForm.controls['username'].value,
                 fullName: this.registrationForm.controls['fullName'].value,
@@ -85,7 +86,7 @@ export class RegisterComponent implements OnInit {
                 graduationYear: this.registrationForm.controls['graduationYear'].value
             }
         ;
-
+        // create user
         this.apiService.post('/employee/add', userInfo).subscribe(data => {
             this.isUserInfoSent = true;
         }, error => {

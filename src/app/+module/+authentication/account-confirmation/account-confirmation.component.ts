@@ -17,6 +17,7 @@ export class AccountConfirmationComponent implements OnInit {
         private router: Router,
         private activatedRoute: ActivatedRoute
     ) {
+        // get token with @RequestParams Spring
         this.activatedRoute.queryParams.subscribe(params => {
             this.confirmationToken = params['token'];
             console.log('confirmationToken 111: '+this.confirmationToken);

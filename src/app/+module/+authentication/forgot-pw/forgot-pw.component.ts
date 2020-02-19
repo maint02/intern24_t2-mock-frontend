@@ -40,6 +40,7 @@ export class ForgotPwComponent implements OnInit {
         }
 
         this.apiService.get('/employee/pw/' + email)
+            // bỏ qua first value
             .pipe(first())
             .subscribe(res => {
                 this.isEmailSent = true;

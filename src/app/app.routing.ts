@@ -6,6 +6,7 @@ export const AppRoutes: Routes = [
     {
         path: '',
         component: AppComponent,
+        // load các module con
         children: [
             {
                 path: 'auth',

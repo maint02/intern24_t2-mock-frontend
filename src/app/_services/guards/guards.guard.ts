@@ -15,7 +15,7 @@ export class GuardsGuard implements CanActivate {
     ) {
 
     }
-
+    // kiểm tra điều kiện khi vào các routing khác nhau
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

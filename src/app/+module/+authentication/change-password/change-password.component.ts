@@ -45,6 +45,7 @@ export class ChangePasswordComponent implements OnInit {
 
 
     onSubmitNewPW() {
+        // check passwordForm có hợp lệ không
         if (this.passwordForm.invalid) {
             this.toastr.error('All fields must be filled out');
             return;
@@ -54,6 +55,7 @@ export class ChangePasswordComponent implements OnInit {
         const rePassword = this.passwordForm.controls['rePassword'].value;
 
 
+        // gắn giá trị model cho form
         const passwords: ChangePasswordModel = {
             oldPassword: oldPassword,
             newPassword: newPassword

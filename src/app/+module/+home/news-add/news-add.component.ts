@@ -23,9 +23,11 @@ export class NewsAddComponent implements OnInit {
         private apiService: ApiService,
         private router: Router
     ) {
-    }
+        // first start;
+}
 
     ngOnInit() {
+        // seconde start;
         this.newsAdd = this.fb.group({
             title: new FormControl('', [Validators.required, Validators.minLength(50)]),
             content: new FormControl('', [Validators.required]),
@@ -33,6 +35,7 @@ export class NewsAddComponent implements OnInit {
             newCategory: new FormControl('', [Validators.required, Validators.minLength(100)]),
             thumbnail: new FormControl('')
         }, {
+            // bắt sự kiện
             updateOn: 'blur'
         });
     }
@@ -41,11 +44,12 @@ export class NewsAddComponent implements OnInit {
         return this.newsAdd.controls;
     }
 
+    // tạo tin mới
     onAdd() {
-        // if (this.newsAdd.invalid) {
-        //   this.toastr.error('All fields need to be filled! invalid');
-        //     return;
-        // }
+        if (this.newsAdd.invalid) {
+          this.toastr.error('All fields need to be filled! invalid');
+            return;
+        }
         const newRequest: NewsRequestModel = {
             title: this.newsAdd.controls['title'].value,
             content: this.newsAdd.controls['content'].value,
